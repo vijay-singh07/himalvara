@@ -1,0 +1,382 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronDown, Search, MapPin, Calendar, Users } from "lucide-react";
+import { Button } from "@/components/ui/Button";
+import { cn } from "@/lib/utils";
+
+/* ─── Slide Data ─────────────────────────────────────────────
+   \n placement matters: each manual break should fall at a
+   natural phrase boundary so no word is orphaned on its own line.
+─────────────────────────────────────────────────────────── */
+const HERO_SLIDES = [
+  {
+    id: 1,
+    image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=90",
+    location: "Jolingkong, Pithoragarh — Uttarakhand",
+    title: "Adi Kailash Yatra —\nIndia's Sacred Kailash",
+    subtitle:
+      "Pilgrimage to Chhota Kailash (6,310 m) and the divine Parvati Kund in the inner Himalaya.",
+    href: "/packages/adi-kailash-yatra",
+  },
+  {
+    id: 2,
+    image: "https://images.unsplash.com/photo-1551632811-561732d1e306?w=1920&q=90",
+    location: "Nabhidhang, Pithoragarh — Uttarakhand",
+    title: "Om Parvat Yatra —\nWhere the Gods Write in Snow",
+    subtitle:
+      "Witness the natural ॐ symbol etched in snow on a sacred Himalayan peak at 6,191 m.",
+    href: "/packages/om-parvat-yatra",
+  },
+  {
+    id: 3,
+    image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1920&q=90",
+    location: "Darma Valley, Pithoragarh — Uttarakhand",
+    title: "Darma Valley Trek —\nThe Last Unspoilt Valley",
+    subtitle:
+      "Remote trails through ancient Shauka villages to the foot of the Panchachuli massif.",
+    href: "/packages/darma-valley-trek",
+  },
+];
+
+/* ─── Search Bar ─────────────────────────────────────────── */
+const DESTINATIONS = [
+  { label: "Where to?", value: "" },
+  { label: "Nepal", value: "Nepal" },
+  { label: "Bhutan", value: "Bhutan" },
+  { label: "Tibet", value: "Tibet" },
+  { label: "India", value: "India" },
+];
+
+const DURATIONS = [
+  { label: "Any length", value: "" },
+  { label: "Under 7 days", value: "short" },
+  { label: "7–14 days", value: "medium" },
+  { label: "Over 14 days", value: "long" },
+];
+
+const GROUP_SIZES = [
+  { label: "1–20 people", value: "" },
+  { label: "Solo", value: "solo" },
+  { label: "2–5 people", value: "small" },
+  { label: "6–10 people", value: "medium" },
+  { label: "10+ people", value: "large" },
+];
+
+function HeroSearchBar() {
+  const router = useRouter();
+  const [destination, setDestination] = useState("");
+  const [duration, setDuration] = useState("");
+  const [group, setGroup] = useState("");
+
+  const handleSearch = () => {
+    const params = new URLSearchParams();
+    if (destination) params.set("destination", destination);
+    if (duration) params.set("duration", duration);
+    if (group) params.set("group", group);
+    const qs = params.toString();
+    router.push(qs ? `/packages?${qs}` : "/packages");
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: 0.85, ease: [0.4, 0, 0.2, 1] }}
+      className="w-full"
+    >
+      {/* Glass card */}
+      <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-1.5">
+        <div className="flex flex-col sm:flex-row">
+          {/* Destination */}
+          <SearchSelect
+            icon={<MapPin className="w-4 h-4 text-[#c8a951]" />}
+            label="Destination"
+            value={destination}
+            onChange={setDestination}
+            options={DESTINATIONS}
+          />
+
+          <div className="hidden sm:block w-px self-stretch bg-white/15 my-1" />
+
+          {/* Duration */}
+          <SearchSelect
+            icon={<Calendar className="w-4 h-4 text-[#c8a951]" />}
+            label="Duration"
+            value={duration}
+            onChange={setDuration}
+            options={DURATIONS}
+          />
+
+          <div className="hidden sm:block w-px self-stretch bg-white/15 my-1" />
+
+          {/* Group size */}
+          <SearchSelect
+            icon={<Users className="w-4 h-4 text-[#c8a951]" />}
+            label="Group Size"
+            value={group}
+            onChange={setGroup}
+            options={GROUP_SIZES}
+          />
+
+          {/* Search button */}
+          <div className="p-1 flex-shrink-0">
+            <button
+              onClick={handleSearch}
+              className="h-full w-full sm:w-auto flex items-center justify-center gap-2 bg-[#c8a951] hover:bg-[#d4b96a] active:scale-[0.98] text-[#0d1f17] font-semibold text-sm rounded-xl px-6 py-3.5 transition-all duration-200 hover:shadow-[0_4px_20px_rgb(200_169_81/0.45)]"
+            >
+              <Search className="w-4 h-4 flex-shrink-0" />
+              <span>Search</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+function SearchSelect({
+  icon,
+  label,
+  value,
+  onChange,
+  options,
+}: {
+  icon: React.ReactNode;
+  label: string;
+  value: string;
+  onChange: (v: string) => void;
+  options: { label: string; value: string }[];
+}) {
+  return (
+    <label className="flex-1 flex items-center gap-3 px-4 py-3.5 rounded-xl hover:bg-white/10 transition-colors cursor-pointer">
+      <span className="flex-shrink-0">{icon}</span>
+      <div className="min-w-0 flex-1">
+        <p className="text-white/50 text-[11px] font-medium uppercase tracking-widest mb-0.5 leading-none">
+          {label}
+        </p>
+        <select
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          className="w-full bg-transparent text-white text-sm font-medium outline-none cursor-pointer appearance-none truncate"
+        >
+          {options.map((o) => (
+            <option key={o.value} value={o.value} className="text-[#132a1f]">
+              {o.label}
+            </option>
+          ))}
+        </select>
+      </div>
+    </label>
+  );
+}
+
+/* ─── Dot Indicators ─────────────────────────────────────── */
+function SlideIndicators({
+  total,
+  current,
+  onChange,
+}: {
+  total: number;
+  current: number;
+  onChange: (i: number) => void;
+}) {
+  return (
+    <div className="flex items-center gap-2">
+      {Array.from({ length: total }).map((_, i) => (
+        <button
+          key={i}
+          onClick={() => onChange(i)}
+          aria-label={`Slide ${i + 1}`}
+          className={cn(
+            "h-[3px] rounded-full bg-white transition-all duration-400",
+            i === current ? "w-8 opacity-100" : "w-3 opacity-35 hover:opacity-60"
+          )}
+        />
+      ))}
+    </div>
+  );
+}
+
+/* ─── Hero Section ───────────────────────────────────────── */
+export function HeroSection() {
+  const [current, setCurrent] = useState(0);
+
+  useEffect(() => {
+    const id = setInterval(
+      () => setCurrent((p) => (p + 1) % HERO_SLIDES.length),
+      6000
+    );
+    return () => clearInterval(id);
+  }, []);
+
+  const slide = HERO_SLIDES[current];
+
+  return (
+    <section className="relative h-screen min-h-[680px] overflow-hidden">
+      {/* ── Background images ── */}
+      <AnimatePresence initial={false}>
+        <motion.div
+          key={current}
+          initial={{ opacity: 0, scale: 1.06 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1.1, ease: [0.4, 0, 0.2, 1] }}
+          className="absolute inset-0"
+        >
+          <Image
+            src={slide.image}
+            alt={slide.location}
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+          />
+        </motion.div>
+      </AnimatePresence>
+
+      {/* ── Gradient overlays ── */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/20 to-black/80" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/55 via-black/20 to-transparent" />
+
+      {/* ── Main content ──────────────────────────────────────
+          Uses the same max-w-7xl mx-auto px-6 lg:px-12 pattern
+          as every other section so horizontal alignment is consistent.
+      ───────────────────────────────────────────────────────── */}
+      <div className="absolute inset-0 z-10 flex items-center">
+        <div className="w-full max-w-7xl mx-auto px-6 lg:px-12">
+          {/* Constrain content to half the screen on large displays */}
+          <div className="max-w-xl lg:max-w-2xl">
+
+            {/* Location badge */}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={`loc-${current}`}
+                initial={{ opacity: 0, x: -16 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 16 }}
+                transition={{ duration: 0.35 }}
+                className="flex items-center gap-2.5 mb-5"
+              >
+                <span className="w-8 h-px bg-[#c8a951]" aria-hidden />
+                <span className="text-[#c8a951] text-xs font-semibold tracking-[0.18em] uppercase">
+                  {slide.location}
+                </span>
+              </motion.div>
+            </AnimatePresence>
+
+            {/* Heading
+                Font scale: 40→52→60→72px (4xl→5xl→6xl→7xl)
+                This keeps "Into the Heart" comfortably on one line
+                and avoids orphaned words at all viewport sizes.
+            */}
+            <AnimatePresence mode="wait">
+              <motion.h1
+                key={`title-${current}`}
+                initial={{ opacity: 0, y: 28 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -16 }}
+                transition={{ duration: 0.55, ease: [0.4, 0, 0.2, 1] }}
+                className="font-display text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-[1.08] tracking-tight mb-5 whitespace-pre-line"
+              >
+                {slide.title}
+              </motion.h1>
+            </AnimatePresence>
+
+            {/* Subtitle */}
+            <AnimatePresence mode="wait">
+              <motion.p
+                key={`sub-${current}`}
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.45, delay: 0.12 }}
+                className="text-white/75 text-base sm:text-lg leading-relaxed mb-8"
+              >
+                {slide.subtitle}
+              </motion.p>
+            </AnimatePresence>
+
+            {/* CTA Buttons */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.45, delay: 0.55 }}
+              className="flex flex-wrap gap-3 mb-8"
+            >
+              <Button variant="primary" size="lg" asChild>
+                <Link href={slide.href}>View This Trek</Link>
+              </Button>
+              <Button variant="outline-light" size="lg" asChild>
+                <Link href="/packages">All Packages</Link>
+              </Button>
+            </motion.div>
+
+            {/* Veteran trust line */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.75 }}
+              className="flex items-center gap-2.5 mb-8"
+            >
+              <svg className="w-3.5 h-3.5 text-[#c8a951] flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z" />
+              </svg>
+              <span className="text-white/65 text-xs font-semibold tracking-[0.2em] uppercase">
+                Veteran Founded · Veteran Led
+              </span>
+              <svg className="w-3.5 h-3.5 text-[#c8a951] flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z" />
+              </svg>
+            </motion.div>
+
+            {/* Search bar */}
+            <HeroSearchBar />
+          </div>
+        </div>
+      </div>
+
+      {/* ── Bottom bar: indicators + counter ── */}
+      <div className="absolute bottom-7 left-0 right-0 z-10">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between">
+          <SlideIndicators
+            total={HERO_SLIDES.length}
+            current={current}
+            onChange={setCurrent}
+          />
+
+          {/* Scroll hint — centre */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.6 }}
+            className="hidden lg:flex flex-col items-center gap-1 absolute left-1/2 -translate-x-1/2"
+          >
+            <span className="text-white/40 text-[10px] tracking-[0.2em] uppercase">
+              Scroll
+            </span>
+            <motion.div
+              animate={{ y: [0, 5, 0] }}
+              transition={{ repeat: Infinity, duration: 1.6, ease: "easeInOut" }}
+            >
+              <ChevronDown className="w-4 h-4 text-white/40" />
+            </motion.div>
+          </motion.div>
+
+          {/* Slide counter */}
+          <p className="text-white/40 text-sm font-mono tabular-nums">
+            <span className="text-white/80 font-medium">
+              {String(current + 1).padStart(2, "0")}
+            </span>
+            {" / "}
+            {String(HERO_SLIDES.length).padStart(2, "0")}
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
