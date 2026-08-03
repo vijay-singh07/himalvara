@@ -6,16 +6,16 @@ import { ContactForm } from "@/components/contact/ContactForm";
 export const metadata = {
   title: "Contact & Booking | Himalvara Travels",
   description:
-    "Get in touch with Himalvara Travels to plan your trek. Veteran-led expeditions across Nepal, Bhutan, Tibet, and India. Free consultation available.",
+    "Get in touch with Himalvara Travels to plan your trek. Veteran-led yatras and treks across Kumaon and Garhwal, Uttarakhand. Free consultation available.",
 };
 
 const INFO_ITEMS = [
   {
     icon: Phone,
     label: "Call / WhatsApp",
-    value: "+91 70119 16777",
-    sub: "Available 7 AM – 9 PM NPT",
-    href: "tel:+917011916777",
+    value: "+91 7819940565",
+    sub: "Available 24/7 · All days",
+    href: "tel:+917819940565",
   },
   {
     icon: Mail,
@@ -34,14 +34,14 @@ const INFO_ITEMS = [
   {
     icon: Clock,
     label: "Office Hours",
-    value: "Mon – Sat, 8 AM – 6 PM",
-    sub: "India Standard Time (UTC+5:30)",
+    value: "Open 24/7 · All days",
+    sub: "Sundays included · India Standard Time (UTC+5:30)",
     href: null,
   },
 ];
 
 const TRUST_POINTS = [
-  { stat: "15+", label: "years guiding" },
+  { stat: "5+", label: "years guiding" },
   { stat: "0", label: "fatalities on record" },
   { stat: "300+", label: "yatras completed" },
   { stat: "4.9★", label: "average client rating" },
@@ -234,7 +234,7 @@ export default function ContactPage() {
             {[
               {
                 q: "How far in advance should I book?",
-                a: "For popular seasons (Oct–Nov, Mar–Apr), book at least 3 months ahead. Off-season treks can be arranged in 4–6 weeks.",
+                a: "We recommend registering at least 1 month in advance so we can secure permits, transport, and accommodation.",
               },
               {
                 q: "Do I need prior trekking experience?",
@@ -242,11 +242,11 @@ export default function ContactPage() {
               },
               {
                 q: "What's your cancellation policy?",
-                a: "Full refund up to 45 days before departure. 50% refund 30–44 days out. Force-majeure situations (weather, health) are handled case-by-case.",
+                a: "50% refund on the booking amount if you cancel 15 or more days before departure. No refund for cancellations within 15 days of departure.",
               },
               {
                 q: "Is travel insurance required?",
-                a: "Yes — we require comprehensive coverage including emergency helicopter evacuation. We can recommend trusted providers.",
+                a: "Yes — better if you have one. Comprehensive coverage including emergency helicopter evacuation is strongly recommended. We can suggest trusted providers.",
               },
             ].map(({ q, a }) => (
               <div key={q} className="bg-white rounded-xl border border-[#e8e4db] p-5">

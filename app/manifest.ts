@@ -4,7 +4,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "Himalvara Travels",
     short_name: "Himalvara",
-    description: "Veteran-led Himalayan trekking and tours in Nepal, Bhutan, Tibet & India.",
+    description: "Veteran-led Himalayan trekking and tours across Kumaon & Garhwal, Uttarakhand.",
     start_url: "/",
     display: "standalone",
     background_color: "#0d1f17",

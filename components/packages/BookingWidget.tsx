@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Clock, Mountain, Users, BarChart2, ShieldCheck, Phone } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import type { Package } from "@/types";
+import { usePackageVariant } from "./PackageVariantContext";
 
 const DIFFICULTY_COLOR: Record<string, string> = {
   Easy: "text-emerald-700",
@@ -13,6 +14,11 @@ const DIFFICULTY_COLOR: Record<string, string> = {
 };
 
 export function BookingWidget({ pkg }: { pkg: Package }) {
+  const ctx = usePackageVariant();
+  const duration = ctx?.duration ?? pkg.duration;
+  const price = ctx?.price ?? pkg.price;
+  const priceNote = ctx?.priceNote ?? pkg.priceNote;
+
   return (
     <div className="sticky top-28 rounded-2xl overflow-hidden shadow-[0_4px_40px_rgb(0_0_0/0.12)] border border-[#e4e4e4]">
       {/* Price header */}
@@ -22,12 +28,12 @@ export function BookingWidget({ pkg }: { pkg: Package }) {
         </p>
         <div className="flex items-baseline gap-2">
           <p className="font-display text-3xl font-bold text-[#c8a951]">
-            ₹{pkg.price.toLocaleString("en-IN")}
+            ₹{price.toLocaleString("en-IN")}
           </p>
           <span className="text-white/50 text-sm">per person</span>
         </div>
-        {pkg.priceNote && (
-          <p className="text-white/40 text-xs mt-1">{pkg.priceNote}</p>
+        {priceNote && (
+          <p className="text-white/40 text-xs mt-1">{priceNote}</p>
         )}
       </div>
 
@@ -38,7 +44,7 @@ export function BookingWidget({ pkg }: { pkg: Package }) {
             <Clock className="w-4 h-4 text-[#c8a951] mt-0.5 flex-shrink-0" />
             <div>
               <p className="text-[10px] text-[#767676] font-medium uppercase tracking-wide">Duration</p>
-              <p className="text-sm font-semibold text-[#132a1f]">{pkg.duration} days</p>
+              <p className="text-sm font-semibold text-[#132a1f]">{duration} days</p>
             </div>
           </div>
 
@@ -116,11 +122,11 @@ export function BookingWidget({ pkg }: { pkg: Package }) {
           </p>
         </div>
         <a
-          href="tel:+917011916777"
+          href="tel:+917819940565"
           className="flex items-center gap-2 text-[#1b3a2d] text-xs font-semibold hover:text-[#c8a951] transition-colors"
         >
           <Phone className="w-3.5 h-3.5" />
-          +91 70119 16777 — Talk to an expert
+          +91 7819940565 — Talk to an expert
         </a>
       </div>
     </div>

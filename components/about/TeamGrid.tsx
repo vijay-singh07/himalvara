@@ -13,11 +13,11 @@ interface TeamMember {
 
 const TEAM: TeamMember[] = [
   {
-    name: "Arjun Rawat",
+    name: "Kuldeep Singh Bisht",
     role: "Founder & CEO",
     badge: "Army Veteran · Major (Retd.)",
     image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80",
-    bio: "Retired Major from the Indian Army's High Altitude Warfare School, Gulmarg. 14 years of service in mountain warfare shaped Arjun's zero-tolerance approach to safety. He founded Himalvara in 2009 to bring military-grade planning to Himalayan adventure.",
+    bio: "Retired Major from the Indian Army's High Altitude Warfare School, Gulmarg. Years of service in mountain warfare shaped Kuldeep's zero-tolerance approach to safety. He founded Himalvara in 2018 to bring military-grade planning to Himalayan adventure.",
   },
   {
     name: "Vikram Singh Dhami",

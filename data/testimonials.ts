@@ -58,7 +58,7 @@ export const TESTIMONIALS: Testimonial[] = [
 ];
 
 export const STATS: Stat[] = [
-  { value: 15, suffix: "+", label: "Years of Experience" },
+  { value: 5, suffix: "+", label: "Years of Experience" },
   { value: 5000, suffix: "+", label: "Happy Trekkers" },
   { value: 80, suffix: "+", label: "Destinations" },
   { value: 98, suffix: "%", label: "Success Rate" },

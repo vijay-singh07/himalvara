@@ -7,7 +7,7 @@ import { GalleryClient } from "@/components/gallery/GalleryClient";
 export const metadata = {
   title: "Gallery | Himalvara Travels",
   description:
-    "Photos from Himalayan treks, cultural tours, and wildlife safaris across Nepal, Bhutan, Tibet, and India. Veteran-led adventures.",
+    "Photos from Himalayan treks and cultural tours across Kumaon and Garhwal, Uttarakhand. Veteran-led adventures.",
 };
 
 export default function GalleryPage() {
@@ -48,7 +48,7 @@ export default function GalleryPage() {
             Adventures Worth Remembering
           </h1>
           <p className="text-white/70 text-base max-w-md">
-            {GALLERY_PHOTOS.length} photographs from Nepal, Bhutan, Tibet, India — and the people who made them possible.
+            {GALLERY_PHOTOS.length} photographs from Kumaon and Garhwal — and the people who made them possible.
           </p>
         </div>
       </section>

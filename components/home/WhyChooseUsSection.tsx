@@ -22,7 +22,7 @@ const FEATURES = [
     icon: Star,
     title: "Unmatched Experience",
     description:
-      "15+ years of guiding thousands of trekkers means we know exactly what makes an adventure truly unforgettable.",
+      "5+ years of guiding hundreds of trekkers means we know exactly what makes an adventure truly unforgettable.",
   },
   {
     icon: HeartHandshake,
@@ -40,7 +40,7 @@ const FEATURES = [
     icon: Award,
     title: "Award-Winning Agency",
     description:
-      "Recognised as one of Nepal's top trekking agencies, with consistent 5-star reviews across all platforms.",
+      "Recognised as one of Uttarakhand's top trekking agencies, with consistent 5-star reviews across all platforms.",
   },
 ];
 
@@ -80,7 +80,7 @@ export function WhyChooseUsSection() {
               transition={{ duration: 0.5, delay: 0.4 }}
               className="absolute bottom-0 right-0 bg-[#1b3a2d] rounded-2xl p-5 shadow-xl"
             >
-              <p className="font-display text-4xl font-bold text-[#c8a951]">15+</p>
+              <p className="font-display text-4xl font-bold text-[#c8a951]">5+</p>
               <p className="text-white text-sm mt-1 leading-snug">
                 Years of<br />Experience
               </p>

@@ -135,11 +135,11 @@ function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
                 <Link href="/contact">Book Your Trek</Link>
               </Button>
               <a
-                href="tel:+917011916777"
+                href="tel:+917819940565"
                 className="flex items-center justify-center gap-2 mt-3 text-sm text-white/60 hover:text-white transition-colors"
               >
                 <Phone className="w-4 h-4" />
-                +91 70119 16777
+                +91 7819940565
               </a>
             </div>
           </motion.div>
@@ -252,14 +252,14 @@ export function Navbar() {
           {/* Desktop Right */}
           <div className="hidden lg:flex items-center gap-4">
             <a
-              href="tel:+917011916777"
+              href="tel:+917819940565"
               className={cn(
                 "flex items-center gap-1.5 text-sm font-medium transition-colors duration-200",
                 isScrolled ? "text-[#2d2d2d] hover:text-[#1b3a2d]" : "text-white/80 hover:text-white"
               )}
             >
               <Phone className="w-4 h-4" />
-              <span className="hidden xl:inline">+91 70119 16777</span>
+              <span className="hidden xl:inline">+91 7819940565</span>
             </a>
             <Button variant="primary" size="sm" asChild>
               <Link href="/contact">Book Now</Link>

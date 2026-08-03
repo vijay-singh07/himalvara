@@ -84,22 +84,22 @@ export function CTASection() {
             className="flex flex-wrap gap-6 mb-8"
           >
             <a
-              href="tel:+917011916777"
+              href="tel:+917819940565"
               className="flex items-center gap-2.5 text-white/70 hover:text-white transition-colors text-sm"
             >
               <div className="w-9 h-9 rounded-full border border-white/30 flex items-center justify-center">
                 <Phone className="w-4 h-4" />
               </div>
-              +91 70119 16777
+              +91 7819940565
             </a>
             <a
-              href="mailto:hello@himalvara.com"
+              href="mailto:info@himalvara.com"
               className="flex items-center gap-2.5 text-white/70 hover:text-white transition-colors text-sm"
             >
               <div className="w-9 h-9 rounded-full border border-white/30 flex items-center justify-center">
                 <Mail className="w-4 h-4" />
               </div>
-              hello@himalvara.com
+              info@himalvara.com
             </a>
           </motion.div>
 

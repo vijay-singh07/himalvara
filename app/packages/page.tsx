@@ -55,7 +55,7 @@ export default async function PackagesPage({
             Find Your Adventure
           </h1>
           <p className="text-white/70 text-base max-w-md">
-            {ALL_PACKAGES.length} curated packages across Nepal, Bhutan, and beyond — crafted with military precision.
+            {ALL_PACKAGES.length} curated packages across Kumaon and Garhwal — crafted with military precision.
           </p>
         </div>
       </section>

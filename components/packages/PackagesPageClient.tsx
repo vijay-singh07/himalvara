@@ -40,10 +40,8 @@ const SORTS = [
 
 const DESTINATIONS_FILTER = [
   { label: "All Destinations", value: "all" },
-  { label: "Nepal", value: "Nepal" },
-  { label: "Bhutan", value: "Bhutan" },
-  { label: "Tibet", value: "Tibet" },
-  { label: "India", value: "India" },
+  { label: "Kumaon", value: "Kumaon" },
+  { label: "Garhwal", value: "Garhwal" },
 ];
 
 interface Filters {

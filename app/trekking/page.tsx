@@ -62,7 +62,7 @@ export default function TrekkingPage() {
               Choose Your Region
             </p>
             <h2 className="font-display text-3xl sm:text-4xl font-bold text-[#132a1f]">
-              Nepal&apos;s Four Great Trekking Regions
+              Kumaon &amp; Garhwal Trekking Regions
             </h2>
           </div>
 

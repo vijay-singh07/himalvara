@@ -8,8 +8,8 @@ export const metadata = {
 };
 
 const QUICK_LINKS = [
-  { href: "/packages", label: "Browse Treks", icon: Mountain, desc: "14 curated expeditions" },
-  { href: "/destinations", label: "Destinations", icon: Map, desc: "Nepal, Bhutan, Tibet, India" },
+  { href: "/packages", label: "Browse Treks", icon: Mountain, desc: "Kumaon & Garhwal expeditions" },
+  { href: "/destinations", label: "Destinations", icon: Map, desc: "Kumaon & Garhwal" },
   { href: "/contact", label: "Talk to a Guide", icon: Home, desc: "Free planning consultation" },
 ];
 

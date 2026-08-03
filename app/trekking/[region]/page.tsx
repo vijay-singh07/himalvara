@@ -70,7 +70,7 @@ export default async function TrekkingRegionPage({
         <div className="absolute bottom-10 left-0 right-0">
           <div className="max-w-7xl mx-auto px-6 lg:px-12">
             <p className="text-[#c8a951] text-xs font-semibold uppercase tracking-widest mb-2">
-              Nepal · Trekking Region
+              Uttarakhand · Trekking Region
             </p>
             <h1 className="font-display text-4xl sm:text-5xl font-bold text-white mb-3">
               {trek.name}

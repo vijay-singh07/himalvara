@@ -41,6 +41,31 @@ export interface Package {
   featured?: boolean;
   popular?: boolean;
   badge?: string;
+  /**
+   * Origin-city variants of this package.
+   * When present, the detail page shows a selector; the top-level
+   * `duration`/`price`/`itinerary` mirror the primary (first) variant.
+   */
+  variants?: PackageVariant[];
+}
+
+export interface PackageVariant {
+  /** Human-readable origin city, e.g. "Pithoragarh" */
+  origin: string;
+  /** Short slug for tabs/URLs, e.g. "pithoragarh" */
+  originSlug: string;
+  /** Trip length in days */
+  duration: number;
+  /** Number of nights (usually duration - 1) */
+  nights?: number;
+  /** All-inclusive price per person in INR */
+  price: number;
+  /** Optional caption under the price, e.g. "Per person, from Pithoragarh" */
+  priceNote?: string;
+  /** Day-by-day plan for this variant. If omitted, falls back to the package's top-level itinerary. */
+  itinerary?: ItineraryDay[];
+  /** Meal count summary, e.g. "3 breakfasts · 2 dinners" */
+  meals?: string;
 }
 
 export interface ItineraryDay {

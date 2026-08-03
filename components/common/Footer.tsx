@@ -5,23 +5,24 @@ import { Logo } from "@/components/common/Logo";
 const FOOTER_LINKS = {
   "Quick Links": [
     { label: "About Us", href: "/about" },
-    { label: "Our Team", href: "/about#team" },
+    // { label: "Our Team", href: "/about#team" }, // hidden — un-hide when team section is restored
     { label: "Blog", href: "/blog" },
     { label: "Gallery", href: "/gallery" },
     { label: "Contact", href: "/contact" },
   ],
   Destinations: [
-    { label: "Nepal", href: "/destinations/nepal" },
-    { label: "Bhutan", href: "/destinations/bhutan" },
-    { label: "Tibet", href: "/destinations/tibet" },
-    { label: "India", href: "/destinations/india" },
+    { label: "Kumaon", href: "/destinations/kumaon" },
+    { label: "Garhwal", href: "/destinations/garhwal" },
   ],
   "Our Packages": [
-    { label: "Adi Kailash Yatra", href: "/packages/adi-kailash-yatra" },
-    { label: "Om Parvat Yatra", href: "/packages/om-parvat-yatra" },
+    { label: "Adi Kailash & Om Parvat", href: "/packages/adi-kailash-yatra" },
     { label: "Darma Valley Trek", href: "/packages/darma-valley-trek" },
     { label: "Panchachuli Base Camp", href: "/packages/panchachuli-base-camp-trek" },
     { label: "Kumaon Temples Tour", href: "/packages/kumaon-temples-heritage-tour" },
+    { label: "Harshil & Gangotri", href: "/packages/harshil-valley-gangotri" },
+    { label: "Kyarkoti Lake Trek", href: "/packages/kyarkoti-lake-trek" },
+    { label: "Gidara Bugyal Trek", href: "/packages/gidara-bugyal-trek" },
+    { label: "Dayara Bugyal Trek", href: "/packages/dayara-bugyal-trek" },
   ],
 };
 
@@ -53,10 +54,10 @@ function YoutubeIcon({ className }: { className?: string }) {
   );
 }
 
-function TwitterXIcon({ className }: { className?: string }) {
+function LinkedInIcon({ className }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+      <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.59 0 4.25 2.36 4.25 5.44v6.3zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45C23.2 24 24 23.23 24 22.28V1.72C24 .77 23.2 0 22.22 0z" />
     </svg>
   );
 }
@@ -65,7 +66,7 @@ const SOCIAL_LINKS = [
   { icon: FacebookIcon, label: "Facebook", href: "#" },
   { icon: InstagramIcon, label: "Instagram", href: "#" },
   { icon: YoutubeIcon, label: "YouTube", href: "#" },
-  { icon: TwitterXIcon, label: "Twitter / X", href: "#" },
+  { icon: LinkedInIcon, label: "LinkedIn", href: "#" },
 ];
 
 export function Footer() {
@@ -88,18 +89,18 @@ export function Footer() {
             {/* Contact Info */}
             <div className="space-y-3 mb-6">
               <a
-                href="tel:+917011916777"
+                href="tel:+917819940565"
                 className="flex items-center gap-3 text-sm text-white/60 hover:text-white transition-colors"
               >
                 <Phone className="w-4 h-4 text-[#c8a951] flex-shrink-0" />
-                +91 70119 16777
+                +91 7819940565
               </a>
               <a
-                href="mailto:hello@himalvara.com"
+                href="mailto:info@himalvara.com"
                 className="flex items-center gap-3 text-sm text-white/60 hover:text-white transition-colors"
               >
                 <Mail className="w-4 h-4 text-[#c8a951] flex-shrink-0" />
-                hello@himalvara.com
+                info@himalvara.com
               </a>
               <p className="flex items-start gap-3 text-sm text-white/60">
                 <MapPin className="w-4 h-4 text-[#c8a951] flex-shrink-0 mt-0.5" />

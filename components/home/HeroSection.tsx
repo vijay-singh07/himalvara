@@ -10,33 +10,38 @@ import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 
 /* ─── Slide Data ─────────────────────────────────────────────
-   \n placement matters: each manual break should fall at a
-   natural phrase boundary so no word is orphaned on its own line.
+   `title` is the trek name (renders big and bold).
+   `tagline` is the accent line below (renders smaller in gold).
+   Kept as separate fields so each can size independently and
+   the layout never breaks when a title is unusually long.
 ─────────────────────────────────────────────────────────── */
 const HERO_SLIDES = [
   {
     id: 1,
-    image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=90",
+    image: "https://upload.wikimedia.org/wikipedia/commons/c/ce/Adi_Kailash.jpg",
     location: "Jolingkong, Pithoragarh — Uttarakhand",
-    title: "Adi Kailash Yatra —\nIndia's Sacred Kailash",
+    title: "Adi Kailash & Om Parvat",
+    tagline: "Twin darshan of the sacred Kumaon",
     subtitle:
-      "Pilgrimage to Chhota Kailash (6,310 m) and the divine Parvati Kund in the inner Himalaya.",
+      "Pilgrimage to Chhota Kailash (6,310 m), Parvati Kund, and the natural ॐ symbol at Nabhidhang.",
     href: "/packages/adi-kailash-yatra",
   },
   {
     id: 2,
-    image: "https://images.unsplash.com/photo-1551632811-561732d1e306?w=1920&q=90",
-    location: "Nabhidhang, Pithoragarh — Uttarakhand",
-    title: "Om Parvat Yatra —\nWhere the Gods Write in Snow",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Gangotri_Temple.jpg/1280px-Gangotri_Temple.jpg",
+    location: "Harshil Valley, Uttarkashi — Uttarakhand",
+    title: "Harshil & Gangotri",
+    tagline: "Where the Ganga is born",
     subtitle:
-      "Witness the natural ॐ symbol etched in snow on a sacred Himalayan peak at 6,191 m.",
-    href: "/packages/om-parvat-yatra",
+      "Sacred source of the Ganga, apple orchards of Harshil, and the trek to Gaumukh glacier.",
+    href: "/packages/harshil-valley-gangotri",
   },
   {
     id: 3,
-    image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1920&q=90",
+    image: "https://upload.wikimedia.org/wikipedia/commons/5/52/Kumaon_Himalaya_1.jpg",
     location: "Darma Valley, Pithoragarh — Uttarakhand",
-    title: "Darma Valley Trek —\nThe Last Unspoilt Valley",
+    title: "Darma Valley Trek",
+    tagline: "The Last Unspoilt Valley",
     subtitle:
       "Remote trails through ancient Shauka villages to the foot of the Panchachuli massif.",
     href: "/packages/darma-valley-trek",
@@ -46,10 +51,8 @@ const HERO_SLIDES = [
 /* ─── Search Bar ─────────────────────────────────────────── */
 const DESTINATIONS = [
   { label: "Where to?", value: "" },
-  { label: "Nepal", value: "Nepal" },
-  { label: "Bhutan", value: "Bhutan" },
-  { label: "Tibet", value: "Tibet" },
-  { label: "India", value: "India" },
+  { label: "Kumaon", value: "Kumaon" },
+  { label: "Garhwal", value: "Garhwal" },
 ];
 
 const DURATIONS = [
@@ -217,7 +220,7 @@ export function HeroSection() {
   const slide = HERO_SLIDES[current];
 
   return (
-    <section className="relative h-screen min-h-[680px] overflow-hidden">
+    <section className="relative h-[100svh] min-h-[780px] overflow-hidden">
       {/* ── Background images ── */}
       <AnimatePresence initial={false}>
         <motion.div
@@ -247,11 +250,13 @@ export function HeroSection() {
           Uses the same max-w-7xl mx-auto px-6 lg:px-12 pattern
           as every other section so horizontal alignment is consistent.
       ───────────────────────────────────────────────────────── */}
-      <div className="absolute inset-0 z-10 flex items-center">
-        <div className="w-full max-w-7xl mx-auto px-6 lg:px-12">
-          {/* Constrain content to half the screen on large displays */}
-          <div className="max-w-xl lg:max-w-2xl">
-
+      <div className="absolute inset-0 z-10 pt-28 sm:pt-32 pb-24">
+        <div className="w-full h-full max-w-7xl mx-auto px-6 lg:px-12 flex flex-col">
+          {/* Dynamic block — location, title, subtitle. Fills the top,
+              anchored to the bottom of its container so it sits just
+              above the pinned CTA/search block. Length changes here
+              expand upward, never pushing the pinned block. */}
+          <div className="flex-1 min-h-0 max-w-xl lg:max-w-2xl xl:max-w-3xl flex flex-col justify-end pb-8">
             {/* Location badge */}
             <AnimatePresence mode="wait">
               <motion.div
@@ -269,10 +274,11 @@ export function HeroSection() {
               </motion.div>
             </AnimatePresence>
 
-            {/* Heading
-                Font scale: 40→52→60→72px (4xl→5xl→6xl→7xl)
-                This keeps "Into the Heart" comfortably on one line
-                and avoids orphaned words at all viewport sizes.
+            {/*
+              Fluid title sizing via clamp() — scales smoothly with the viewport
+              between a mobile minimum and a desktop cap, so a longer title
+              (like "Adi Kailash & Om Parvat") shrinks instead of overflowing.
+              text-wrap: balance distributes words evenly across lines.
             */}
             <AnimatePresence mode="wait">
               <motion.h1
@@ -281,13 +287,27 @@ export function HeroSection() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -16 }}
                 transition={{ duration: 0.55, ease: [0.4, 0, 0.2, 1] }}
-                className="font-display text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-[1.08] tracking-tight mb-5 whitespace-pre-line"
+                className="font-display font-bold text-white leading-[1.08] tracking-tight mb-3 [text-wrap:balance] [hyphens:auto]"
+                style={{ fontSize: "clamp(2.25rem, 4.5vw + 0.5rem, 4.25rem)" }}
               >
                 {slide.title}
               </motion.h1>
             </AnimatePresence>
 
-            {/* Subtitle */}
+            <AnimatePresence mode="wait">
+              <motion.p
+                key={`tagline-${current}`}
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.5, delay: 0.08, ease: [0.4, 0, 0.2, 1] }}
+                className="font-display text-[#c8a951] font-semibold leading-tight tracking-tight mb-5 [text-wrap:balance]"
+                style={{ fontSize: "clamp(1.125rem, 1.8vw + 0.5rem, 1.875rem)" }}
+              >
+                {slide.tagline}
+              </motion.p>
+            </AnimatePresence>
+
             <AnimatePresence mode="wait">
               <motion.p
                 key={`sub-${current}`}
@@ -295,18 +315,22 @@ export function HeroSection() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.45, delay: 0.12 }}
-                className="text-white/75 text-base sm:text-lg leading-relaxed mb-8"
+                className="text-white/75 text-base sm:text-lg leading-relaxed [text-wrap:balance]"
               >
                 {slide.subtitle}
               </motion.p>
             </AnimatePresence>
+          </div>
 
-            {/* CTA Buttons */}
+          {/* Static block — CTAs, trust line, search bar. Pinned to
+              the bottom of the hero so its position never shifts as
+              slides change. */}
+          <div className="max-w-xl lg:max-w-2xl flex-shrink-0">
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.45, delay: 0.55 }}
-              className="flex flex-wrap gap-3 mb-8"
+              className="flex flex-wrap gap-3 mb-6"
             >
               <Button variant="primary" size="lg" asChild>
                 <Link href={slide.href}>View This Trek</Link>
@@ -316,12 +340,11 @@ export function HeroSection() {
               </Button>
             </motion.div>
 
-            {/* Veteran trust line */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.75 }}
-              className="flex items-center gap-2.5 mb-8"
+              className="flex items-center gap-2.5 mb-6"
             >
               <svg className="w-3.5 h-3.5 text-[#c8a951] flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z" />
@@ -334,7 +357,6 @@ export function HeroSection() {
               </svg>
             </motion.div>
 
-            {/* Search bar */}
             <HeroSearchBar />
           </div>
         </div>

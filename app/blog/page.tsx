@@ -7,7 +7,7 @@ import { BlogPageClient } from "@/components/blog/BlogPageClient";
 export const metadata = {
   title: "Blog | Himalvara Travels",
   description:
-    "Trek guides, safety tips, gear reviews, and stories from veteran-led Himalayan expeditions across Nepal, Bhutan, Tibet, and India.",
+    "Trek guides, safety tips, gear reviews, and stories from veteran-led Himalayan expeditions across Kumaon and Garhwal, Uttarakhand.",
 };
 
 export default function BlogPage() {

@@ -5,49 +5,42 @@ import { cn } from "@/lib/utils";
 
 const MILESTONES = [
   {
-    year: "2009",
+    year: "2018",
     title: "Founded",
     description:
-      "Retired Major Arjun Rawat registers Himalvara Travels in Pithoragarh with one guide, one porter, and a single mantra: safety above all.",
+      "Retired Major Kuldeep Singh Bisht registers Himalvara Travels in Pithoragarh with one guide, one porter, and a single mantra: safety above all.",
     highlight: true,
   },
   {
-    year: "2011",
+    year: "2019",
     title: "First Adi Kailash Expedition",
     description:
       "Our inaugural Adi Kailash Yatra group of 6 pilgrims — 100% completion rate. The template for every yatra and expedition that followed was written on that journey.",
   },
   {
-    year: "2015",
-    title: "Uttarakhand Flood Response",
-    description:
-      "When devastating floods struck the region, our team immediately pivoted to humanitarian support — coordinating evacuations and supply runs across Pithoragarh district for 3 months.",
-    highlight: true,
-  },
-  {
-    year: "2017",
+    year: "2021",
     title: "Darma Valley & Inner Line Routes",
     description:
       "Secured licensed operator status for Inner Line Permit routes and launched the Darma Valley Trek and Om Parvat Yatra. Our veteran-grade logistics extended into the most remote corridors of Kumaon.",
   },
   {
-    year: "2019",
-    title: "1,000th Client Milestone",
+    year: "2023",
+    title: "500th Client Milestone",
     description:
-      "A decade of yatras and treks, zero fatalities, and a 98% completion success rate. We celebrated with a sunrise ceremony at Nabhidhang with our guides.",
+      "Five years of yatras and treks, zero fatalities, and a 98% completion success rate. We celebrated with a sunrise ceremony at Nabhidhang with our guides.",
     highlight: true,
   },
   {
-    year: "2022",
+    year: "2024",
     title: "5-Star Rating Across All Platforms",
     description:
-      "Consistently rated 5 stars on TripAdvisor, Google, and Trustpilot. Best Trekking Agency Uttarakhand award — for the third consecutive year.",
+      "Consistently rated 5 stars on TripAdvisor, Google, and Trustpilot. Best Trekking Agency Uttarakhand award — for the second consecutive year.",
   },
   {
-    year: "2024",
-    title: "5,000+ Trekkers Served",
+    year: "2026",
+    title: "1,000+ Trekkers Served",
     description:
-      "15 years. 5,000+ adventurers from 60+ countries. The Kumaon Himalaya remains humbling — we remain ready.",
+      "Five-plus years. Over 1,000 adventurers from 30+ countries. The Kumaon Himalaya remains humbling — we remain ready.",
     highlight: true,
   },
 ];

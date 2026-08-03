@@ -6,10 +6,8 @@ export const NAV_LINKS: NavLink[] = [
     label: "Destinations",
     href: "/destinations",
     children: [
-      { label: "Nepal", href: "/destinations/nepal" },
-      { label: "Bhutan", href: "/destinations/bhutan" },
-      { label: "Tibet", href: "/destinations/tibet" },
-      { label: "India", href: "/destinations/india" },
+      { label: "Kumaon", href: "/destinations/kumaon" },
+      { label: "Garhwal", href: "/destinations/garhwal" },
     ],
   },
   {
@@ -20,6 +18,10 @@ export const NAV_LINKS: NavLink[] = [
       { label: "Darma Valley", href: "/trekking/darma-valley" },
       { label: "Munsiyari & Panchachuli", href: "/trekking/munsiyari" },
       { label: "Kumaon Cultural Circuit", href: "/trekking/kumaon-cultural" },
+      { label: "Harshil & Gangotri", href: "/trekking/harshil-gangotri" },
+      { label: "Kyarkoti Lake", href: "/trekking/kyarkoti-lake" },
+      { label: "Gidara Bugyal", href: "/trekking/gidara-bugyal" },
+      { label: "Dayara Bugyal", href: "/trekking/dayara-bugyal" },
     ],
   },
   {
@@ -29,7 +31,8 @@ export const NAV_LINKS: NavLink[] = [
       { label: "All Packages", href: "/packages" },
       { label: "Adi Kailash Yatra", href: "/packages/adi-kailash-yatra" },
       { label: "Darma Valley Trek", href: "/packages/darma-valley-trek" },
-      { label: "Kumaon Temples Tour", href: "/packages/kumaon-temples-heritage-tour" },
+      { label: "Dayara Bugyal Trek", href: "/packages/dayara-bugyal-trek" },
+      { label: "Harshil & Gangotri", href: "/packages/harshil-valley-gangotri" },
     ],
   },
   { label: "Gallery", href: "/gallery" },

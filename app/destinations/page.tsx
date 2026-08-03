@@ -7,7 +7,7 @@ import { ALL_PACKAGES } from "@/data/packages";
 export const metadata = {
   title: "Destinations | Himalvara Travels",
   description:
-    "Explore Nepal, Bhutan, Tibet, and India with Himalvara — veteran-led Himalayan adventures crafted with military precision.",
+    "Explore Kumaon and Garhwal, Uttarakhand with Himalvara — veteran-led Himalayan yatras and treks crafted with military precision.",
 };
 
 export default function DestinationsPage() {
@@ -58,7 +58,7 @@ export default function DestinationsPage() {
             {[
               { value: DESTINATIONS.length, label: "Destinations" },
               { value: ALL_PACKAGES.length + "+", label: "Packages" },
-              { value: "15+", label: "Years Experience" },
+              { value: "5+", label: "Years Experience" },
               { value: "98%", label: "Success Rate" },
             ].map(({ value, label }) => (
               <div key={label}>

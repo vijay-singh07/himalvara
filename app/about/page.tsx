@@ -131,14 +131,14 @@ export default function AboutPage() {
                 <p className="text-[#0d1f17] font-bold text-sm leading-snug">
                   Veteran Founded<br />& Led
                 </p>
-                <p className="text-[#0d1f17]/60 text-[10px] mt-1 font-medium">Est. 2009</p>
+                <p className="text-[#0d1f17]/60 text-[10px] mt-1 font-medium">Est. 2018</p>
               </div>
 
               {/* Floating stat card */}
               <div className="absolute bottom-0 left-0 bg-white rounded-2xl p-4 shadow-xl border border-[#e4e4e4]">
                 <p className="font-display text-3xl font-bold text-[#1b3a2d]">0</p>
                 <p className="text-[#767676] text-xs font-medium leading-snug">
-                  Fatalities in<br />15 years of operation
+                  Fatalities in<br />our years of operation
                 </p>
               </div>
             </div>
@@ -155,7 +155,7 @@ export default function AboutPage() {
 
               <div className="space-y-4 text-white/70 text-base leading-relaxed">
                 <p>
-                  In 2007, Major Arjun Rawat completed 14 years of service with the Indian Army's
+                  Before founding Himalvara, Major Kuldeep Singh Bisht served with the Indian Army's
                   High Altitude Warfare School in Gulmarg. He had planned operations in conditions
                   that would shut down most civilian expeditions — blizzards at 5,000 m,
                   evacuations in whiteout conditions, supply drops on vertical terrain.
@@ -168,13 +168,13 @@ export default function AboutPage() {
                   preventable.
                 </p>
                 <p>
-                  He founded Himalvara in 2009 with a single commitment: to run Himalayan
+                  He founded Himalvara in 2018 with a single commitment: to run Himalayan
                   adventures with the same precision, planning, and accountability that the Army
                   had demanded of him. Not watered-down adventure — <em>genuine</em> adventure,
                   conducted safely.
                 </p>
                 <p>
-                  Fifteen years later, over 5,000 trekkers have returned home safely. The zero-fatality
+                  Several years on, hundreds of trekkers have returned home safely. The zero-fatality
                   record remains intact. The standard has never dropped.
                 </p>
               </div>
@@ -182,10 +182,10 @@ export default function AboutPage() {
               {/* Veteran trust strip */}
               <div className="mt-8 pt-8 border-t border-white/10 grid grid-cols-2 gap-5">
                 {[
-                  { value: "14 yrs", label: "Founder's Army service" },
-                  { value: "0", label: "Fatalities in 15 years" },
+                  { value: "Army", label: "Veteran leadership" },
+                  { value: "0", label: "Fatalities on record" },
                   { value: "98%", label: "Trek success rate" },
-                  { value: "5,000+", label: "Trekkers served" },
+                  { value: "5+", label: "Years of operation" },
                 ].map(({ value, label }) => (
                   <div key={label}>
                     <p className="font-display text-2xl font-bold text-[#c8a951]">{value}</p>
@@ -226,28 +226,31 @@ export default function AboutPage() {
       </section>
 
       {/* ── Team ──────────────────────────────────────────────── */}
-      <section className="py-20 lg:py-28 bg-white">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="text-center mb-14">
-            <p className="text-[#c8a951] text-xs font-semibold tracking-[0.2em] uppercase mb-3">
-              The People Behind Every Trek
-            </p>
-            <h2 className="font-display text-3xl sm:text-4xl font-bold text-[#132a1f]">
-              Meet the Team
-            </h2>
-            <p className="text-[#767676] text-base mt-3 max-w-xl mx-auto">
-              Hover over any card to read their story. These are the people who will stand between you and the mountain.
-            </p>
+      {/* Temporarily hidden — un-hide by removing the `false &&` wrapper */}
+      {false && (
+        <section className="py-20 lg:py-28 bg-white">
+          <div className="max-w-7xl mx-auto px-6 lg:px-12">
+            <div className="text-center mb-14">
+              <p className="text-[#c8a951] text-xs font-semibold tracking-[0.2em] uppercase mb-3">
+                The People Behind Every Trek
+              </p>
+              <h2 className="font-display text-3xl sm:text-4xl font-bold text-[#132a1f]">
+                Meet the Team
+              </h2>
+              <p className="text-[#767676] text-base mt-3 max-w-xl mx-auto">
+                Hover over any card to read their story. These are the people who will stand between you and the mountain.
+              </p>
+            </div>
+            <TeamGrid />
           </div>
-          <TeamGrid />
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* ── Timeline ──────────────────────────────────────────── */}
       <section className="py-20 lg:py-28 bg-[#f8f4ec]">
         <div className="max-w-4xl mx-auto px-6 lg:px-12">
           <div className="text-center mb-14">
-            <p className="text-[#c8a951] text-xs font-semibold tracking-[0.2em] uppercase mb-3">15 Years in the Mountains</p>
+            <p className="text-[#c8a951] text-xs font-semibold tracking-[0.2em] uppercase mb-3">Years in the Mountains</p>
             <h2 className="font-display text-3xl sm:text-4xl font-bold text-[#132a1f]">
               Our Journey
             </h2>

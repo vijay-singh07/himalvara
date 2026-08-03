@@ -3,9 +3,11 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Star, ChevronRight, CheckCircle2, XCircle } from "lucide-react";
 import { ALL_PACKAGES } from "@/data/packages";
-import { ItineraryAccordion } from "@/components/packages/ItineraryAccordion";
 import { BookingWidget } from "@/components/packages/BookingWidget";
 import { PackageCard } from "@/components/packages/PackageCard";
+import { PackageVariantProvider } from "@/components/packages/PackageVariantContext";
+import { VariantSelector } from "@/components/packages/VariantSelector";
+import { VariantItinerary } from "@/components/packages/VariantItinerary";
 
 export async function generateStaticParams() {
   return ALL_PACKAGES.map((pkg) => ({ slug: pkg.slug }));
@@ -119,6 +121,7 @@ export default async function PackageDetailPage({
       </section>
 
       {/* ── Main Content ──────────────────────────────────────── */}
+      <PackageVariantProvider pkg={pkg}>
       <div className="max-w-7xl mx-auto px-6 lg:px-12 py-14">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-14">
           {/* Left: content */}
@@ -146,13 +149,16 @@ export default async function PackageDetailPage({
               </section>
             )}
 
+            {/* Variant selector */}
+            <VariantSelector />
+
             {/* Itinerary */}
             {pkg.itinerary && pkg.itinerary.length > 0 && (
               <section className="mb-12">
                 <h2 className="font-display text-2xl font-bold text-[#132a1f] mb-5">
                   Day-by-Day Itinerary
                 </h2>
-                <ItineraryAccordion itinerary={pkg.itinerary} />
+                <VariantItinerary fallbackItinerary={pkg.itinerary} />
               </section>
             )}
 
@@ -226,6 +232,7 @@ export default async function PackageDetailPage({
           </div>
         </div>
       </div>
+      </PackageVariantProvider>
 
       {/* ── Related Packages ──────────────────────────────────── */}
       {related.length > 0 && (

@@ -17,7 +17,7 @@ export function DestinationsSection() {
           <SectionTitle
             eyebrow="Where to Go"
             title={"Discover Our\nDestinations"}
-            subtitle="From Nepal's towering peaks to Bhutan's sacred valleys — every destination holds a story worth experiencing."
+            subtitle="From the sacred Kumaon border valleys to Garhwal's alpine meadows and the source of the Ganga — every destination holds a story worth experiencing."
             align="left"
           />
           <motion.div

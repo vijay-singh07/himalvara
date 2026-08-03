@@ -3,6 +3,7 @@ import "./globals.css";
 import { Navbar } from "@/components/common/Navbar";
 import { Footer } from "@/components/common/Footer";
 import { ScrollToTop } from "@/components/common/ScrollToTop";
+import { WhatsAppFloat } from "@/components/common/WhatsAppFloat";
 
 const BASE = "https://www.himalvara.com";
 
@@ -52,7 +53,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "@himalvara",
     title: "Himalvara Travels — Veteran-Led Himalayan Trekking & Tours",
-    description: "Veteran-led expeditions across Nepal, Bhutan, Tibet & India.",
+    description: "Veteran-led yatras and treks across Kumaon & Garhwal, Uttarakhand.",
     images: ["https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=80"],
   },
   robots: {
@@ -80,8 +81,8 @@ const organizationSchema = {
   url: BASE,
   logo: `${BASE}/logo.png`,
   description:
-    "Veteran-led yatras and trekking company specialising in the Kumaon Himalaya, Uttarakhand, India since 2009.",
-  foundingDate: "2009",
+    "Veteran-led yatras and trekking company specialising in the Kumaon Himalaya, Uttarakhand, India since 2018.",
+  foundingDate: "2018",
   address: {
     "@type": "PostalAddress",
     streetAddress: "Pithoragarh",
@@ -92,7 +93,7 @@ const organizationSchema = {
   },
   contactPoint: {
     "@type": "ContactPoint",
-    telephone: "+91-70119-16777",
+    telephone: "+91-7819940565",
     contactType: "customer service",
     availableLanguage: ["English", "Hindi"],
   },
@@ -118,6 +119,7 @@ export default function RootLayout({
         <main>{children}</main>
         <Footer />
         <ScrollToTop />
+        <WhatsAppFloat />
       </body>
     </html>
   );
