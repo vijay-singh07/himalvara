@@ -54,7 +54,7 @@ export const DESTINATIONS: DestinationDetail[] = [
     slug: "garhwal",
     name: "Garhwal",
     country: "Uttarakhand, India",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Gangotri_Temple.jpg/1280px-Gangotri_Temple.jpg",
+    image: "/packages/harshil-valley.jpg",
     tagline: "Sacred Sources · Alpine Meadows",
     packageCount: 4,
     featured: true,

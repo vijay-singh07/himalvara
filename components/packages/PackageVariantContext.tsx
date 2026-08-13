@@ -13,6 +13,8 @@ interface VariantContextValue {
   priceNote?: string;
   itinerary?: ItineraryDay[];
   meals?: string;
+  /** True when the active variant is priced on request rather than by a fixed number */
+  customQuote: boolean;
 }
 
 const VariantContext = createContext<VariantContextValue | null>(null);
@@ -40,6 +42,7 @@ export function PackageVariantProvider({
       priceNote: selected?.priceNote ?? pkg.priceNote,
       itinerary: selected?.itinerary ?? pkg.itinerary,
       meals: selected?.meals,
+      customQuote: selected?.customQuote ?? false,
     };
   }, [variants, selectedSlug, pkg.duration, pkg.price, pkg.priceNote, pkg.itinerary]);
 

@@ -1,17 +1,33 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Send, CheckCircle, AlertCircle, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const TREK_INTERESTS = [
-  "Adi Kailash Yatra",
-  "Om Parvat Yatra",
+  "Adi Kailash & Om Parvat Yatra",
   "Darma Valley Trek",
   "Panchachuli Base Camp Trek",
   "Kumaon Temples & Heritage Tour",
+  "Harshil Valley & Gangotri",
+  "Kyarkoti Lake Trek",
+  "Gidara Bugyal Trek",
+  "Dayara Bugyal Trek",
   "Custom / Not sure yet",
 ];
+
+/* Maps package slug (from ?package= query param on incoming links) to the
+   exact trek label shown in the dropdown. Keep in sync with TREK_INTERESTS. */
+const SLUG_TO_TREK: Record<string, string> = {
+  "adi-kailash-yatra": "Adi Kailash & Om Parvat Yatra",
+  "darma-valley-trek": "Darma Valley Trek",
+  "panchachuli-base-camp-trek": "Panchachuli Base Camp Trek",
+  "kumaon-temples-heritage-tour": "Kumaon Temples & Heritage Tour",
+  "harshil-valley-gangotri": "Harshil Valley & Gangotri",
+  "kyarkoti-lake-trek": "Kyarkoti Lake Trek",
+  "gidara-bugyal-trek": "Gidara Bugyal Trek",
+  "dayara-bugyal-trek": "Dayara Bugyal Trek",
+};
 
 const GROUP_SIZES = ["Solo", "2 people", "3–5 people", "6–10 people", "10+ people"];
 
@@ -24,7 +40,7 @@ interface Fields {
   phone: string;
   trek: string;
   groupSize: string;
-  departureMonth: string;
+  departureDate: string;
   message: string;
 }
 
@@ -35,9 +51,16 @@ const EMPTY: Fields = {
   phone: "",
   trek: "",
   groupSize: "",
-  departureMonth: "",
+  departureDate: "",
   message: "",
 };
+
+/* Today in YYYY-MM-DD, used as the `min` on the date input so past dates
+   can't be picked. Recomputed each render so the picker reflects the
+   actual current day even if the tab has been open for a while. */
+function todayIso(): string {
+  return new Date().toISOString().slice(0, 10);
+}
 
 function Field({ label, required, children, hint }: {
   label: string;
@@ -64,6 +87,17 @@ export function ContactForm() {
   const [fields, setFields] = useState<Fields>(EMPTY);
   const [status, setStatus] = useState<FormState>("idle");
 
+  /* Pre-select the trek when the page is opened from a package CTA
+     (e.g. /contact?package=adi-kailash-yatra). Reading window.location
+     inside an effect avoids needing a Suspense boundary around the form. */
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const slug = new URLSearchParams(window.location.search).get("package");
+    if (!slug) return;
+    const trek = SLUG_TO_TREK[slug];
+    if (trek) setFields((f) => ({ ...f, trek }));
+  }, []);
+
   const set = (key: keyof Fields) => (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => setFields((f) => ({ ...f, [key]: e.target.value }));
@@ -71,9 +105,17 @@ export function ContactForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("loading");
-    /* Simulate async submission — replace with real API call */
-    await new Promise((r) => setTimeout(r, 1200));
-    setStatus("success");
+    try {
+      const res = await fetch("/api/lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(fields),
+      });
+      if (!res.ok) throw new Error((await res.json().catch(() => ({}))).error ?? `HTTP ${res.status}`);
+      setStatus("success");
+    } catch {
+      setStatus("error");
+    }
   };
 
   if (status === "success") {
@@ -181,12 +223,12 @@ export function ContactForm() {
             <ChevronDown className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#767676]" />
           </div>
         </Field>
-        <Field label="Preferred departure" hint="Approximate month & year">
+        <Field label="Preferred departure date">
           <input
-            type="text"
-            placeholder="Oct 2025"
-            value={fields.departureMonth}
-            onChange={set("departureMonth")}
+            type="date"
+            value={fields.departureDate}
+            onChange={set("departureDate")}
+            min={todayIso()}
             className={inputCls}
           />
         </Field>

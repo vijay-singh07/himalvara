@@ -84,11 +84,11 @@ export default function AboutPage() {
           </div>
 
           <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight">
-            Built on Service.<br />
-            <span className="text-[#c8a951]">Driven by Mountains.</span>
+            Two Brothers.<br />
+            <span className="text-[#c8a951]">One Calling.</span>
           </h1>
           <p className="text-white/70 text-base sm:text-lg max-w-xl">
-            The story of an army veteran who traded camouflage for trekking poles — and never lowered his standards.
+            Kuldeep &amp; Vijay — different paths, one destination. The Himalayas.
           </p>
         </div>
       </section>
@@ -106,95 +106,161 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ── Founding Story (Veteran Section) ─────────────────── */}
+      {/* ── Founders ─────────────────────────────────────────── */}
       <section className="bg-[#0d1f17] py-24 lg:py-32 overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
-            {/* Left: image + floating badge */}
-            <div className="relative pt-8 pb-6 pr-6 lg:pr-4">
-              <div className="relative h-[480px] rounded-2xl overflow-hidden shadow-2xl">
-                <Image
-                  src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800&q=85"
-                  alt="Himalayan mountains — where Himalvara was born"
-                  fill
-                  sizes="(min-width: 1024px) 50vw, 100vw"
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+
+          {/* Section header */}
+          <div className="text-center mb-16">
+            <p className="text-[#c8a951] text-xs font-semibold tracking-[0.24em] uppercase mb-4 flex items-center justify-center gap-2">
+              <span className="w-8 h-px bg-[#c8a951]/60" />
+              The Founding Story
+              <span className="w-8 h-px bg-[#c8a951]/60" />
+            </p>
+            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight">
+              Two Brothers. One Calling.<br />
+              <span className="text-[#c8a951]">The Himalayas.</span>
+            </h2>
+          </div>
+
+          {/* Two founder cards */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-16">
+
+            {/* Kuldeep */}
+            <div className="group relative bg-white/5 border border-white/10 rounded-3xl p-8 hover:border-[#c8a951]/40 hover:bg-white/[0.07] transition-all duration-500">
+              <div className="absolute top-6 right-6 bg-[#c8a951] rounded-xl px-3 py-1.5">
+                <span className="text-[#0d1f17] text-[10px] font-bold tracking-[0.18em] uppercase">Co-Founder</span>
               </div>
 
-              {/* Floating veteran badge */}
-              <div className="absolute top-0 right-0 bg-[#c8a951] rounded-2xl p-5 shadow-2xl max-w-[180px]">
-                <svg className="w-8 h-8 text-[#0d1f17] mb-2" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z" />
-                </svg>
-                <p className="text-[#0d1f17] font-bold text-sm leading-snug">
-                  Veteran Founded<br />& Led
-                </p>
-                <p className="text-[#0d1f17]/60 text-[10px] mt-1 font-medium">Est. 2018</p>
+              <div className="flex items-start gap-5 mb-6">
+                <div className="w-16 h-16 rounded-2xl bg-[#c8a951]/15 border border-[#c8a951]/30 flex items-center justify-center flex-shrink-0">
+                  <svg className="w-7 h-7 text-[#c8a951]" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 className="font-display text-2xl font-bold text-white">Kuldeep Singh Bisht</h3>
+                  <p className="text-[#c8a951]/80 text-sm font-medium mt-0.5">Indian Army Veteran · Co-Founder</p>
+                </div>
               </div>
 
-              {/* Floating stat card */}
-              <div className="absolute bottom-0 left-0 bg-white rounded-2xl p-4 shadow-xl border border-[#e4e4e4]">
-                <p className="font-display text-3xl font-bold text-[#1b3a2d]">0</p>
-                <p className="text-[#767676] text-xs font-medium leading-snug">
-                  Fatalities in<br />our years of operation
+              <div className="space-y-4 text-white/65 text-[15px] leading-relaxed mb-7">
+                <p>
+                  Kuldeep brings a foundation built on years of service in the Indian Army — a career defined by discipline, leadership, and the weight of responsibility that comes with keeping people safe in the most demanding environments.
                 </p>
+                <p>
+                  As a seasoned traveler and corporate professional, he has always understood that genuine experiences come from thoughtful preparation and a refusal to cut corners. His guiding philosophy, shaped by years in uniform, is simple: <span className="text-white font-medium italic">when you take responsibility for something, you give it your very best.</span>
+                </p>
+                <p>
+                  That standard has never wavered. It is the backbone of every Himalvara journey.
+                </p>
+              </div>
+
+              <div className="flex flex-wrap gap-2">
+                {["Army Veteran", "Corporate Professional", "Mountain Leader", "Safety-First"].map((tag) => (
+                  <span key={tag} className="bg-white/8 border border-white/12 text-white/55 text-[11px] font-medium px-3 py-1 rounded-full">
+                    {tag}
+                  </span>
+                ))}
               </div>
             </div>
 
-            {/* Right: story */}
-            <div>
-              <p className="text-[#c8a951] text-xs font-semibold tracking-[0.2em] uppercase mb-4 flex items-center gap-2">
-                <span className="w-6 h-px bg-[#c8a951]" />
-                Our Founding Story
-              </p>
-              <h2 className="font-display text-3xl sm:text-4xl font-bold text-white mb-6 leading-tight">
-                When a Major Trades the Barracks for the Mountains
-              </h2>
+            {/* Vijay */}
+            <div className="group relative bg-white/5 border border-white/10 rounded-3xl p-8 hover:border-[#c8a951]/40 hover:bg-white/[0.07] transition-all duration-500">
+              <div className="absolute top-6 right-6 bg-[#c8a951] rounded-xl px-3 py-1.5">
+                <span className="text-[#0d1f17] text-[10px] font-bold tracking-[0.18em] uppercase">Co-Founder</span>
+              </div>
 
-              <div className="space-y-4 text-white/70 text-base leading-relaxed">
+              <div className="flex items-start gap-5 mb-6">
+                <div className="w-16 h-16 rounded-2xl bg-[#c8a951]/15 border border-[#c8a951]/30 flex items-center justify-center flex-shrink-0">
+                  <svg className="w-7 h-7 text-[#c8a951]" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 className="font-display text-2xl font-bold text-white">Vijay Singh Bisht</h3>
+                  <p className="text-[#c8a951]/80 text-sm font-medium mt-0.5">Trekker · Athlete · Co-Founder</p>
+                </div>
+              </div>
+
+              <div className="space-y-4 text-white/65 text-[15px] leading-relaxed mb-7">
                 <p>
-                  Before founding Himalvara, Major Kuldeep Singh Bisht served with the Indian Army's
-                  High Altitude Warfare School in Gulmarg. He had planned operations in conditions
-                  that would shut down most civilian expeditions — blizzards at 5,000 m,
-                  evacuations in whiteout conditions, supply drops on vertical terrain.
+                  Vijay&apos;s connection with the mountains goes beyond travel — it is in how he has always moved through the world. A national-level football player and zonal basketball player, he brings a lifelong athlete&apos;s instinct for endurance, teamwork, and pushing past what seems possible.
                 </p>
                 <p>
-                  What he saw when he transitioned to civilian trekking shocked him. Groups were
-                  ascending too fast. Emergency protocols were vague or non-existent. Guides were
-                  charming but undertrained for altitude emergencies. He once watched a tourist
-                  develop severe altitude sickness that had been entirely predictable — and
-                  preventable.
+                  As a corporate professional and passionate trekker, he has spent years exploring the lesser-known corners of the Himalayas, discovering trails, villages, and moments that most itineraries simply miss. That firsthand knowledge shapes Himalvara&apos;s belief in journeys that feel <span className="text-white font-medium italic">authentic, immersive, and unhurried.</span>
                 </p>
                 <p>
-                  He founded Himalvara in 2018 with a single commitment: to run Himalayan
-                  adventures with the same precision, planning, and accountability that the Army
-                  had demanded of him. Not watered-down adventure — <em>genuine</em> adventure,
-                  conducted safely.
-                </p>
-                <p>
-                  Several years on, hundreds of trekkers have returned home safely. The zero-fatality
-                  record remains intact. The standard has never dropped.
+                  For Vijay, adventure is not a product. It is a way of being.
                 </p>
               </div>
 
-              {/* Veteran trust strip */}
-              <div className="mt-8 pt-8 border-t border-white/10 grid grid-cols-2 gap-5">
-                {[
-                  { value: "Army", label: "Veteran leadership" },
-                  { value: "0", label: "Fatalities on record" },
-                  { value: "98%", label: "Trek success rate" },
-                  { value: "5+", label: "Years of operation" },
-                ].map(({ value, label }) => (
-                  <div key={label}>
-                    <p className="font-display text-2xl font-bold text-[#c8a951]">{value}</p>
-                    <p className="text-white/50 text-xs font-medium">{label}</p>
-                  </div>
+              <div className="flex flex-wrap gap-2">
+                {["National Footballer", "Zonal Basketball", "Sports Enthusiast", "Himalayan Explorer"].map((tag) => (
+                  <span key={tag} className="bg-white/8 border border-white/12 text-white/55 text-[11px] font-medium px-3 py-1 rounded-full">
+                    {tag}
+                  </span>
                 ))}
               </div>
             </div>
           </div>
+
+          {/* Shared narrative */}
+          <div className="max-w-3xl mx-auto text-center mb-16">
+            <div className="w-px h-12 bg-gradient-to-b from-transparent to-[#c8a951]/60 mx-auto mb-8" />
+            <div className="space-y-5 text-white/65 text-base leading-relaxed">
+              <p>
+                Their paths have been different — one forged in discipline and service, one driven by sport, exploration, and a hunger for what lies beyond the next ridge. But their destination has always been the same.
+              </p>
+              <p className="text-xl text-white/90 font-display font-semibold italic">
+                The Himalayas.
+              </p>
+              <p>
+                Himalvara is the result of that shared passion — a travel company built not merely to sell packages, but to craft experiences with thought, purpose, and personal care. From sacred pilgrimages and high-altitude expeditions to quiet mountain escapes and immersive cultural journeys, every experience is designed with one question in mind:
+              </p>
+              <p className="text-[#c8a951] font-semibold text-lg italic">
+                &ldquo;Would we choose this journey for ourselves?&rdquo;
+              </p>
+              <p>If the answer is yes, it belongs at Himalvara.</p>
+            </div>
+          </div>
+
+          {/* Our Promise */}
+          <div className="bg-white/[0.04] border border-[#c8a951]/20 rounded-3xl p-8 sm:p-12 max-w-4xl mx-auto">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-8 h-8 rounded-xl bg-[#c8a951]/20 flex items-center justify-center flex-shrink-0">
+                <svg className="w-4 h-4 text-[#c8a951]" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z" />
+                </svg>
+              </div>
+              <h3 className="font-display text-xl font-bold text-white">Our Promise</h3>
+            </div>
+            <div className="space-y-4 text-white/65 text-[15px] leading-relaxed">
+              <p>
+                We may be in the business of travel, but our foundation is trust. We believe in honest commitments, thoughtful planning, responsible travel, and genuine hospitality.
+              </p>
+              <p>
+                Because when someone chooses to travel with us, they are not just booking a trip. They are trusting us with their time, their dreams, and a part of their story.
+              </p>
+              <p className="text-white font-medium">
+                And that is a responsibility we never take lightly.
+              </p>
+            </div>
+            <div className="mt-8 pt-8 border-t border-white/10 grid grid-cols-2 sm:grid-cols-4 gap-6">
+              {[
+                { value: "0", label: "Fatalities on record" },
+                { value: "98%", label: "Trek success rate" },
+                { value: "5+", label: "Years of operation" },
+                { value: "★", label: "Veteran Founded · Well Crafted" },
+              ].map(({ value, label }) => (
+                <div key={label} className="text-center">
+                  <p className="font-display text-2xl font-bold text-[#c8a951]">{value}</p>
+                  <p className="text-white/45 text-[11px] font-medium mt-1 leading-snug">{label}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
         </div>
       </section>
 

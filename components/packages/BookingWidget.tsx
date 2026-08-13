@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Clock, Mountain, Users, BarChart2, ShieldCheck, Phone } from "lucide-react";
+import { Clock, Mountain, Users, BarChart2, ShieldCheck, Phone, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import type { Package } from "@/types";
 import { usePackageVariant } from "./PackageVariantContext";
@@ -16,24 +16,47 @@ const DIFFICULTY_COLOR: Record<string, string> = {
 export function BookingWidget({ pkg }: { pkg: Package }) {
   const ctx = usePackageVariant();
   const duration = ctx?.duration ?? pkg.duration;
-  const price = ctx?.price ?? pkg.price;
-  const priceNote = ctx?.priceNote ?? pkg.priceNote;
+
+  /* "Starts from" pricing:
+     - If any variant has a real (non-custom-quote) price, show the lowest of those.
+     - Otherwise (all variants are custom quote, or no variants), show tailored copy. */
+  const pricedVariants = pkg.variants?.filter((v) => !v.customQuote) ?? [];
+  const startsFrom = pricedVariants.length > 0
+    ? Math.min(...pricedVariants.map((v) => v.price))
+    : null;
+  const showStartsFrom = startsFrom !== null;
 
   return (
     <div className="sticky top-28 rounded-2xl overflow-hidden shadow-[0_4px_40px_rgb(0_0_0/0.12)] border border-[#e4e4e4]">
-      {/* Price header */}
+      {/* Pricing header */}
       <div className="bg-[#0d1f17] px-6 py-5">
-        <p className="text-white/50 text-[10px] font-semibold tracking-widest uppercase mb-1">
-          Starting from
-        </p>
-        <div className="flex items-baseline gap-2">
-          <p className="font-display text-3xl font-bold text-[#c8a951]">
-            ₹{price.toLocaleString("en-IN")}
-          </p>
-          <span className="text-white/50 text-sm">per person</span>
-        </div>
-        {priceNote && (
-          <p className="text-white/40 text-xs mt-1">{priceNote}</p>
+        {showStartsFrom ? (
+          <>
+            <p className="text-white/50 text-[10px] font-semibold tracking-widest uppercase mb-1">
+              Starts from
+            </p>
+            <div className="flex items-baseline gap-2">
+              <p className="font-display text-3xl font-bold text-[#c8a951]">
+                ₹{startsFrom.toLocaleString("en-IN")}
+              </p>
+              <span className="text-white/50 text-sm">per person</span>
+            </div>
+            <p className="text-white/40 text-xs mt-2 leading-snug">
+              Final price varies by dates, group size, and starting city.
+            </p>
+          </>
+        ) : (
+          <>
+            <p className="text-white/50 text-[10px] font-semibold tracking-widest uppercase mb-1">
+              Every trek, tailored
+            </p>
+            <p className="font-display text-2xl font-bold text-[#c8a951] leading-tight">
+              Custom package
+            </p>
+            <p className="text-white/50 text-xs mt-2 leading-snug">
+              Pricing depends on your group size, dates, and add-ons.
+            </p>
+          </>
         )}
       </div>
 
@@ -103,14 +126,30 @@ export function BookingWidget({ pkg }: { pkg: Package }) {
         )}
       </div>
 
-      {/* CTAs */}
-      <div className="bg-white px-6 py-5 space-y-3">
-        <Button variant="primary" size="lg" className="w-full" asChild>
-          <Link href={`/contact?package=${pkg.slug}`}>Book This Trek</Link>
+      {/*
+        CTA — a single prominent gold button opens the contact form
+        with the trek pre-selected. The soft cream gradient background
+        + gold drop-shadow lift the button off the white card so the eye
+        lands here naturally after scanning the stats above.
+      */}
+      <div className="bg-gradient-to-b from-[#faf6ec] to-white px-6 py-6 border-t border-[#f0ebe0]">
+        <p className="text-center text-[10px] text-[#8a6f2f] font-bold tracking-[0.22em] uppercase mb-3">
+          Ready to plan your trek?
+        </p>
+        <Button
+          variant="primary"
+          size="lg"
+          className="w-full px-6 shadow-[0_6px_20px_rgb(200_169_81/0.35)] hover:shadow-[0_10px_28px_rgb(200_169_81/0.5)] hover:-translate-y-0.5"
+          asChild
+        >
+          <Link href={`/contact?package=${pkg.slug}`}>
+            Get Your Custom Package
+            <ArrowRight className="w-4 h-4" />
+          </Link>
         </Button>
-        <Button variant="outline" size="lg" className="w-full" asChild>
-          <Link href={`/contact?type=quote&package=${pkg.slug}`}>Get Free Quote</Link>
-        </Button>
+        <p className="text-center text-[11px] text-[#767676] mt-3 leading-snug">
+          Free consultation · Response within 24 hours
+        </p>
       </div>
 
       {/* Veteran trust footer */}

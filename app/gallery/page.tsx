@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import { GALLERY_PHOTOS } from "@/data/gallery";
-import { GalleryClient } from "@/components/gallery/GalleryClient";
+import { GalleryClientWrapper } from "@/components/gallery/GalleryClientWrapper";
 
 export const metadata = {
   title: "Gallery | Himalvara Travels",
@@ -14,47 +14,54 @@ export default function GalleryPage() {
   return (
     <>
       {/* ── Hero ──────────────────────────────────────────────── */}
-      <section className="relative h-[340px] overflow-hidden">
+      <section className="relative h-[420px] overflow-hidden bg-[#060e09]">
         <Image
-          src="https://images.unsplash.com/photo-1551632811-561732d1e306?w=1920&q=85"
-          alt="Himalayan peaks"
+          src="/gallery/vsb-247.jpg"
+          alt="Himalayan peaks — Vijay Singh Bisht"
           fill
           priority
           sizes="100vw"
-          className="object-cover"
+          className="object-cover opacity-60"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0d1f17]/75 via-[#0d1f17]/50 to-[#0d1f17]/85" />
+        {/* cinematic gradient */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-[#080f0b]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#060e09]/70 via-transparent to-[#060e09]/70" />
 
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
-          <nav className="flex items-center gap-1.5 text-white/50 text-xs font-medium mb-6" aria-label="Breadcrumb">
-            <Link href="/" className="hover:text-white transition-colors">Home</Link>
+          <nav className="flex items-center gap-1.5 text-white/40 text-xs font-medium mb-6" aria-label="Breadcrumb">
+            <Link href="/" className="hover:text-white/80 transition-colors">Home</Link>
             <ChevronRight className="w-3 h-3" />
-            <span className="text-white/80">Gallery</span>
+            <span className="text-white/70">Gallery</span>
           </nav>
 
-          <div className="flex items-center gap-2 mb-5">
-            <svg className="w-3 h-3 text-[#c8a951]" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z" />
-            </svg>
-            <span className="text-white/60 text-[10px] font-semibold tracking-[0.22em] uppercase">
+          <div className="flex items-center gap-2 mb-4">
+            <div className="w-8 h-px bg-[#c8a951]/60" />
+            <span className="text-[#c8a951]/80 text-[10px] font-bold tracking-[0.28em] uppercase">
               Through the Lens
             </span>
-            <svg className="w-3 h-3 text-[#c8a951]" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z" />
-            </svg>
+            <div className="w-8 h-px bg-[#c8a951]/60" />
           </div>
 
-          <h1 className="font-display text-4xl sm:text-5xl font-bold text-white mb-3">
-            Adventures Worth Remembering
+          <h1 className="font-display text-5xl sm:text-6xl font-bold text-white mb-4 drop-shadow-2xl">
+            Adventures Worth<br className="hidden sm:block" /> Remembering
           </h1>
-          <p className="text-white/70 text-base max-w-md">
-            {GALLERY_PHOTOS.length} photographs from Kumaon and Garhwal — and the people who made them possible.
+          <p className="text-white/60 text-sm max-w-sm leading-relaxed">
+            {GALLERY_PHOTOS.length} photographs from Kumaon & Garhwal
+            <br />
+            <a
+              href="https://www.instagram.com/__vijay_singh/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 text-[#c8a951]/80 hover:text-[#c8a951] transition-colors"
+            >
+              by Vijay Singh Bisht
+            </a>
           </p>
         </div>
       </section>
 
       {/* ── Gallery ───────────────────────────────────────────── */}
-      <GalleryClient photos={GALLERY_PHOTOS} />
+      <GalleryClientWrapper photos={GALLERY_PHOTOS} />
     </>
   );
 }

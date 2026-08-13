@@ -28,7 +28,7 @@ const HERO_SLIDES = [
   },
   {
     id: 2,
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Gangotri_Temple.jpg/1280px-Gangotri_Temple.jpg",
+    image: "/packages/harshil-valley.jpg",
     location: "Harshil Valley, Uttarkashi — Uttarakhand",
     title: "Harshil & Gangotri",
     tagline: "Where the Ganga is born",
@@ -38,7 +38,7 @@ const HERO_SLIDES = [
   },
   {
     id: 3,
-    image: "https://upload.wikimedia.org/wikipedia/commons/5/52/Kumaon_Himalaya_1.jpg",
+    image: "https://upload.wikimedia.org/wikipedia/commons/d/dc/Panchachuli_from_Darma_Valley.jpg",
     location: "Darma Valley, Pithoragarh — Uttarakhand",
     title: "Darma Valley Trek",
     tagline: "The Last Unspoilt Valley",

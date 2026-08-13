@@ -66,6 +66,12 @@ export interface PackageVariant {
   itinerary?: ItineraryDay[];
   /** Meal count summary, e.g. "3 breakfasts · 2 dinners" */
   meals?: string;
+  /**
+   * When true, the variant's price is treated as an estimate and the UI
+   * displays "Custom quote — priced per your requirements" instead of a
+   * hard number. Use for variants where a proper package doc is pending.
+   */
+  customQuote?: boolean;
 }
 
 export interface ItineraryDay {

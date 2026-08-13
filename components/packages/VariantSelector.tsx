@@ -39,20 +39,14 @@ export function VariantSelector() {
                   active ? "text-white/60" : "text-[#767676]"
                 )}
               >
-                {v.duration}D · ₹{v.price.toLocaleString("en-IN")}
+                {v.duration} days{v.nights ? ` · ${v.nights} nights` : ""}
               </span>
             </button>
           );
         })}
       </div>
-      {ctx.selected && (
-        <p className="text-[11px] text-[#767676] mt-3">
-          {ctx.selected.nights ? `${ctx.selected.nights} nights · ` : ""}
-          {ctx.selected.meals ?? ""}
-          {ctx.selected.priceNote?.includes("estimated") && (
-            <span className="italic text-[#8a6f2f]"> · price estimated pending final doc</span>
-          )}
-        </p>
+      {ctx.selected?.meals && (
+        <p className="text-[11px] text-[#767676] mt-3">{ctx.selected.meals}</p>
       )}
     </div>
   );

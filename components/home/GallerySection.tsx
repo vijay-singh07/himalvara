@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, ZoomIn } from "lucide-react";
+import { ArrowRight, Images } from "lucide-react";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { Button } from "@/components/ui/Button";
 
@@ -21,44 +21,44 @@ import { Button } from "@/components/ui/Button";
 const GALLERY_ITEMS = [
   {
     id: "g1",
-    src: "https://upload.wikimedia.org/wikipedia/commons/1/17/Parvati_Kund_at_Adi-Kailash.jpg",
-    alt: "Parvati Kund — sacred glacial lake at Adi Kailash, Pithoragarh",
+    src: "/gallery/vsb-309.jpg",
+    alt: "Two trekkers lying in alpine grass facing a panorama of snow-capped Himalayan peaks",
     className: "row-span-2",
   },
   {
     id: "g2",
-    src: "https://upload.wikimedia.org/wikipedia/commons/9/9a/Om_Parwat.jpg",
-    alt: "Om Parvat — natural OM symbol etched in snow, Nabhidhang",
+    src: "/gallery/vsb-299.jpg",
+    alt: "A pyramidal snow-covered Himalayan peak glowing in golden alpenglow at dusk",
     className: "",
   },
   {
     id: "g3",
-    src: "https://upload.wikimedia.org/wikipedia/commons/e/e0/Panchachuli_Peaks.jpg",
-    alt: "Panchachuli peaks rising above the Kumaon Himalaya",
+    src: "/gallery/vsb-297.jpg",
+    alt: "White marble temple shikhara with a saffron flag flying against a deep blue night sky",
     className: "",
   },
   {
     id: "g4",
-    src: "https://upload.wikimedia.org/wikipedia/commons/5/52/Kumaon_Himalaya_1.jpg",
-    alt: "Kumaon Himalaya mountains, Dharchula region",
+    src: "/gallery/vsb-310.jpg",
+    alt: "A gnarled deodar tree frames a sweeping view down a forested mountain valley",
     className: "col-span-2",
   },
   {
     id: "g5",
-    src: "https://upload.wikimedia.org/wikipedia/commons/c/ce/Adi_Kailash.jpg",
-    alt: "Adi Kailash (Chhota Kailash) — sacred peak, Pithoragarh",
+    src: "/gallery/vsb-300.jpg",
+    alt: "A star-filled night sky above snow-dusted mountain ridges framed by silhouetted conifers",
     className: "",
   },
   {
     id: "g6",
-    src: "https://upload.wikimedia.org/wikipedia/commons/6/66/Panchachuli_%2Cuttarakhand%2CIndia.JPG",
-    alt: "Panchachuli massif from Munsiyari, Uttarakhand",
+    src: "/gallery/vsb-316.jpg",
+    alt: "A solo traveller with a backpack stands before lush green meadows and massive snow-streaked peaks",
     className: "",
   },
   {
     id: "g7",
-    src: "https://upload.wikimedia.org/wikipedia/commons/c/c8/Complete_pic_of_Jageshwar_temple.jpg",
-    alt: "Jageshwar Dham ancient temple complex, Almora, Kumaon",
+    src: "/gallery/vsb-303.jpg",
+    alt: "A trekker performs a handstand on a vast snow-covered glacier field with pine trees behind",
     className: "",
   },
 ];
@@ -140,6 +140,7 @@ function GalleryThumb({
       transition={{ duration: 0.45, delay: index * 0.07 }}
       className={`relative group overflow-hidden rounded-xl ${className}`}
     >
+      <Link href="/gallery" className="absolute inset-0 z-10" aria-label="View full gallery" />
       <Image
         src={item.src}
         alt={item.alt}
@@ -149,8 +150,9 @@ function GalleryThumb({
       />
       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300" />
       <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-        <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
-          <ZoomIn className="w-5 h-5 text-white" />
+        <div className="flex items-center gap-2 bg-black/50 backdrop-blur-sm text-white text-xs font-semibold px-4 py-2 rounded-full border border-white/20">
+          <Images className="w-3.5 h-3.5" />
+          View Gallery
         </div>
       </div>
     </motion.div>

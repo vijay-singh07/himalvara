@@ -51,7 +51,7 @@ export const TREKKING_REGIONS: TrekkingRegion[] = [
     slug: "darma-valley",
     name: "Darma Valley",
     subtitle: "Uttarakhand's last unspoilt frontier",
-    image: "https://upload.wikimedia.org/wikipedia/commons/5/52/Kumaon_Himalaya_1.jpg",
+    image: "https://upload.wikimedia.org/wikipedia/commons/d/dc/Panchachuli_from_Darma_Valley.jpg",
     description:
       "Threading through ancient Shauka villages to the foot of the Panchachuli massif, the Darma Valley is one of the most remote and dramatically beautiful treks in the entire Himalayan range.",
     longDescription:
@@ -134,7 +134,7 @@ export const TREKKING_REGIONS: TrekkingRegion[] = [
     slug: "harshil-gangotri",
     name: "Harshil Valley & Gangotri",
     subtitle: "Sacred source of the Ganga",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Gangotri_Temple.jpg/1280px-Gangotri_Temple.jpg",
+    image: "/packages/harshil-valley.jpg",
     description:
       "The upper Bhagirathi valley — sleepy Harshil village amid apple orchards, the sacred Gangotri Dham, and the trek to Gaumukh where the Ganga literally begins.",
     longDescription:

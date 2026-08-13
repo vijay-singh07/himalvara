@@ -8,7 +8,7 @@ const MILESTONES = [
     year: "2018",
     title: "Founded",
     description:
-      "Retired Major Kuldeep Singh Bisht registers Himalvara Travels in Pithoragarh with one guide, one porter, and a single mantra: safety above all.",
+      "Retired Kuldeep Singh Bisht registers Himalvara Travels in Pithoragarh with one guide, one porter, and a single mantra: safety above all.",
     highlight: true,
   },
   {

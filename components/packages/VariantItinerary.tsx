@@ -21,8 +21,8 @@ export function VariantItinerary({ fallbackItinerary }: { fallbackItinerary?: It
     <>
       {usingFallback && (
         <p className="text-xs text-[#8a6f2f] bg-[#faf3e0] border border-[#efdfae] rounded-lg px-3 py-2 mb-4">
-          Detailed day-by-day itinerary for the <strong>{ctx?.selected?.origin}</strong> variant is being finalised.
-          The plan below is the base itinerary — the selected variant adds or removes transit days on either end.
+          The plan below is our base itinerary. Your <strong>{ctx?.selected?.origin}</strong> departure
+          will be tailored around it — transit days, group size, and add-ons are agreed as part of your custom quote.
         </p>
       )}
       <ItineraryAccordion itinerary={itinerary} />

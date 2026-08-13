@@ -64,7 +64,7 @@ function LinkedInIcon({ className }: { className?: string }) {
 
 const SOCIAL_LINKS = [
   { icon: FacebookIcon, label: "Facebook", href: "#" },
-  { icon: InstagramIcon, label: "Instagram", href: "#" },
+  { icon: InstagramIcon, label: "Instagram", href: "https://www.instagram.com/Himalvara/" },
   { icon: YoutubeIcon, label: "YouTube", href: "#" },
   { icon: LinkedInIcon, label: "LinkedIn", href: "#" },
 ];
@@ -115,6 +115,8 @@ export function Footer() {
                   key={label}
                   href={href}
                   aria-label={label}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-9 h-9 rounded-full bg-white/10 hover:bg-[#c8a951] flex items-center justify-center transition-all duration-200 hover:scale-110"
                 >
                   <Icon className="w-4 h-4" />

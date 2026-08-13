@@ -17,6 +17,11 @@ interface PackageCardProps {
 }
 
 export function PackageCard({ pkg, className }: PackageCardProps) {
+  /* A package is "custom-quote only" when every variant is priced on request.
+     In that case we hide the ₹ number on the card and show "Custom quote" instead. */
+  const allCustomQuote =
+    !!pkg.variants && pkg.variants.length > 0 && pkg.variants.every((v) => v.customQuote);
+
   return (
     <Link
       href={`/packages/${pkg.slug}`}
@@ -104,11 +109,22 @@ export function PackageCard({ pkg, className }: PackageCardProps) {
         {/* Price + CTA */}
         <div className="flex items-center justify-between pt-4 border-t border-[#f0ebe0]">
           <div>
-            <p className="text-[10px] text-[#767676] font-medium uppercase tracking-wide">From</p>
-            <p className="font-display text-xl font-bold text-[#132a1f]">
-              ₹{pkg.price.toLocaleString("en-IN")}
-              <span className="font-body font-normal text-[#767676] text-xs ml-1">/ person</span>
+            <p className="text-[10px] text-[#767676] font-medium uppercase tracking-wide">
+              {allCustomQuote ? "Pricing" : "From"}
             </p>
+            {allCustomQuote ? (
+              <p className="font-display text-lg font-bold text-[#132a1f] leading-tight">
+                Custom quote
+                <span className="font-body font-normal text-[#767676] text-xs block">
+                  per your requirements
+                </span>
+              </p>
+            ) : (
+              <p className="font-display text-xl font-bold text-[#132a1f]">
+                ₹{pkg.price.toLocaleString("en-IN")}
+                <span className="font-body font-normal text-[#767676] text-xs ml-1">/ person</span>
+              </p>
+            )}
           </div>
           <div className="flex items-center gap-1.5 text-sm font-semibold text-[#1b3a2d] group-hover:text-[#c8a951] transition-colors">
             View Trek
