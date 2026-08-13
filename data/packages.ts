@@ -8,7 +8,6 @@ const INDIA_TREK_INCLUDES = [
   "Experienced English-speaking, government-certified guide",
   "Inner Line Permit and all forest / wildlife department permits",
   "Comprehensive first-aid kit and emergency oxygen",
-  "Himalvara branded duffel bag",
   "All road tolls, parking, green tax, and driver allowances",
   "24 / 7 emergency rescue coordination",
 ];
@@ -41,6 +40,28 @@ const INDIA_CULTURAL_EXCLUDES = [
   "Personal expenses and shopping",
   "Temple / puja fees and ritual donations",
   "Gratuities for guide and driver (recommended)",
+];
+
+const GARHWAL_TREK_INCLUDES = [
+  "Return transport from Dehradun / Rishikesh (private AC vehicle)",
+  "All accommodation — hotels in towns, tents / guesthouses on trail",
+  "All meals during the tour — breakfast, lunch, and dinner",
+  "Experienced English-speaking, government-certified guide",
+  "All required forest / national park entry permits",
+  "Comprehensive first-aid kit and emergency oxygen",
+  "All road tolls, parking, green tax, and driver allowances",
+  "24 / 7 emergency rescue coordination",
+];
+
+const GARHWAL_TREK_EXCLUDES = [
+  "Flights to Dehradun (Jolly Grant) airport or train to Haridwar / Dehradun",
+  "Travel and medical insurance (recommended — better if you have one)",
+  "Personal trekking gear and equipment",
+  "Porter service (available locally at ₹500 / day)",
+  "Personal expenses — beverages, laundry, phone charging",
+  "Gratuities for guide and driver (recommended)",
+  "Temple / puja fees and ritual donations",
+  "Emergency helicopter evacuation (covered by rescue insurance)",
 ];
 
 /* ─── Active Packages ─────────────────────────────────────────── */
@@ -788,8 +809,8 @@ export const ALL_PACKAGES: Package[] = [
         altitude: 640,
       },
     ],
-    includes: INDIA_TREK_INCLUDES,
-    excludes: INDIA_TREK_EXCLUDES,
+    includes: GARHWAL_TREK_INCLUDES,
+    excludes: GARHWAL_TREK_EXCLUDES,
     featured: true,
     popular: true,
     badge: "Sacred",
@@ -928,8 +949,8 @@ export const ALL_PACKAGES: Package[] = [
         altitude: 640,
       },
     ],
-    includes: INDIA_TREK_INCLUDES,
-    excludes: INDIA_TREK_EXCLUDES,
+    includes: GARHWAL_TREK_INCLUDES,
+    excludes: GARHWAL_TREK_EXCLUDES,
     featured: false,
     badge: "Off-Beat",
     variants: [
@@ -1065,8 +1086,8 @@ export const ALL_PACKAGES: Package[] = [
         altitude: 640,
       },
     ],
-    includes: INDIA_TREK_INCLUDES,
-    excludes: INDIA_TREK_EXCLUDES,
+    includes: GARHWAL_TREK_INCLUDES,
+    excludes: GARHWAL_TREK_EXCLUDES,
     featured: false,
     badge: "Off-Beat",
     variants: [
@@ -1186,8 +1207,8 @@ export const ALL_PACKAGES: Package[] = [
         altitude: 640,
       },
     ],
-    includes: INDIA_TREK_INCLUDES,
-    excludes: INDIA_TREK_EXCLUDES,
+    includes: GARHWAL_TREK_INCLUDES,
+    excludes: GARHWAL_TREK_EXCLUDES,
     featured: true,
     popular: true,
     badge: "Family-Friendly",

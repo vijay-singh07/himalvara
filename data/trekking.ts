@@ -161,7 +161,7 @@ export const TREKKING_REGIONS: TrekkingRegion[] = [
     slug: "kyarkoti-lake",
     name: "Kyarkoti Lake",
     subtitle: "Hidden turquoise lake in the Bhagirathi basin",
-    image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1200&q=85",
+    image: "/packages/kyarkoti-lake.jpg",
     description:
       "A high glacial lake at ~4,600 m tucked into a hanging valley beneath Sudarshan Parvat — one of Garhwal's genuinely offbeat high-altitude treks.",
     longDescription:
@@ -188,7 +188,7 @@ export const TREKKING_REGIONS: TrekkingRegion[] = [
     slug: "gidara-bugyal",
     name: "Gidara Bugyal",
     subtitle: "Garhwal's largest untouched alpine meadow",
-    image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=85",
+    image: "/packages/gidara-bugyal.jpg",
     description:
       "A vast alpine meadow ridge above Uttarkashi with 360° Himalayan views of Bandarpunch, Kalanag, and the Gangotri group — and a fraction of the crowds of nearby Dayara.",
     longDescription:

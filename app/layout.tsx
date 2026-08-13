@@ -16,16 +16,20 @@ export const metadata: Metadata = {
   description:
     "Veteran-led spiritual yatras and treks in the Kumaon Himalaya, Uttarakhand. Adi Kailash, Om Parvat, Darma Valley, Panchachuli Base Camp, and Kumaon cultural heritage tours.",
   keywords: [
+    "Himalvara",
+    "Himalvara Travels",
     "Adi Kailash Yatra",
     "Om Parvat Yatra",
     "Darma Valley Trek",
     "Panchachuli Base Camp",
     "Kumaon trekking",
+    "Garhwal trekking",
     "Uttarakhand trek",
     "Pithoragarh trekking",
     "Inner Line Permit trek",
     "veteran trek guides India",
-    "Himalvara Travels",
+    "Himalayan travel company",
+    "Kumaon tour operator",
   ],
   authors: [{ name: "Himalvara Travels" }],
   creator: "Himalvara Travels",
@@ -42,7 +46,7 @@ export const metadata: Metadata = {
       "Veteran-led yatras and treks in the Kumaon Himalaya. Adi Kailash, Om Parvat, Darma Valley, Panchachuli Base Camp & Kumaon cultural tours.",
     images: [
       {
-        url: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=80",
+        url: `${BASE}/gallery/vsb-299.jpg`,
         width: 1200,
         height: 630,
         alt: "Himalayan peaks — Himalvara Travels",
@@ -54,7 +58,7 @@ export const metadata: Metadata = {
     site: "@himalvara",
     title: "Himalvara Travels — Veteran-Led Himalayan Trekking & Tours",
     description: "Veteran-led yatras and treks across Kumaon & Garhwal, Uttarakhand.",
-    images: ["https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=80"],
+    images: [`${BASE}/gallery/vsb-299.jpg`],
   },
   robots: {
     index: true,
