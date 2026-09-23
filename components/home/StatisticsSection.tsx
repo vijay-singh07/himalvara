@@ -14,26 +14,32 @@ function CountUp({
   suffix?: string;
   duration?: number;
 }) {
-  const [count, setCount] = useState(0);
+  // Start at target so SSR / initial HTML always shows real numbers (not 0).
+  const [count, setCount] = useState(target);
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true });
+  const animated = useRef(false);
 
   useEffect(() => {
-    if (!inView) return;
-    const start = Date.now();
+    if (animated.current || !inView) return;
+    animated.current = true;
+    setCount(0);
+    const startTime = Date.now();
+    let frame: number;
     const step = () => {
-      const elapsed = Date.now() - start;
+      const elapsed = Date.now() - startTime;
       const progress = Math.min(elapsed / duration, 1);
-      // Ease-out cubic
       const eased = 1 - Math.pow(1 - progress, 3);
       setCount(Math.round(eased * target));
-      if (progress < 1) requestAnimationFrame(step);
+      if (progress < 1) frame = requestAnimationFrame(step);
     };
-    requestAnimationFrame(step);
+    frame = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(frame);
   }, [inView, target, duration]);
 
   return (
-    <span ref={ref}>
+    // suppressHydrationWarning: server renders `target`, client resets to 0 then animates
+    <span ref={ref} suppressHydrationWarning>
       {count.toLocaleString()}
       {suffix}
     </span>

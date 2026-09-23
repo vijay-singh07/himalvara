@@ -58,12 +58,11 @@ export function BlogPageClient({ posts }: { posts: BlogPost[] }) {
 
               <div className="flex items-center gap-4">
                 <div className="flex items-center gap-2">
-                  {featured.authorImage && (
-                    <div className="w-8 h-8 rounded-full overflow-hidden border border-white/20 flex-shrink-0">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={featured.authorImage} alt={featured.author} className="w-full h-full object-cover" />
-                    </div>
-                  )}
+                  <div className="w-8 h-8 rounded-full bg-[#c8a951] flex items-center justify-center flex-shrink-0 border border-white/20">
+                    <span className="text-[#0d1f17] text-xs font-bold leading-none">
+                      {featured.author.split(" ").map((n: string) => n[0]).slice(0, 2).join("")}
+                    </span>
+                  </div>
                   <span className="text-white text-sm font-semibold">{featured.author}</span>
                 </div>
                 <span className="w-1 h-1 rounded-full bg-white/40" />

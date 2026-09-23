@@ -86,14 +86,14 @@ export function TestimonialsSection() {
           className="flex flex-wrap justify-center items-center gap-10 mt-16 pt-12 border-t border-[#e4e4e4]"
         >
           {[
-            { label: "TripAdvisor", rating: "5.0", reviews: "342 Reviews" },
-            { label: "Google", rating: "4.9", reviews: "289 Reviews" },
-            { label: "Trustpilot", rating: "4.8", reviews: "156 Reviews" },
-          ].map((platform) => (
-            <div key={platform.label} className="text-center">
-              <p className="text-xs text-[#9e9e9e] uppercase tracking-widest mb-1.5">{platform.label}</p>
-              <p className="font-display text-2xl font-bold text-[#1b3a2d]">⭐ {platform.rating}</p>
-              <p className="text-xs text-[#767676] mt-0.5">{platform.reviews}</p>
+            { label: "Zero Fatalities", value: "100%", sub: "Safety record across all treks" },
+            { label: "Trek Completion Rate", value: "98%", sub: "Industry average is ~85%" },
+            { label: "Veteran Founded", value: "2018", sub: "Army-grade expedition planning" },
+          ].map((item) => (
+            <div key={item.label} className="text-center">
+              <p className="text-xs text-[#9e9e9e] uppercase tracking-widest mb-1.5">{item.label}</p>
+              <p className="font-display text-2xl font-bold text-[#1b3a2d]">{item.value}</p>
+              <p className="text-xs text-[#767676] mt-0.5">{item.sub}</p>
             </div>
           ))}
         </motion.div>

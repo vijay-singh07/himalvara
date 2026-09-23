@@ -18,11 +18,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/contact`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.6 },
   ];
 
+  const GSC_PRIORITY_PACKAGES = new Set([
+    "adi-kailash-yatra",
+    "darma-valley-trek",
+    "panchachuli-base-camp-trek",
+  ]);
+
   const packageRoutes: MetadataRoute.Sitemap = ALL_PACKAGES.map((pkg) => ({
     url: `${BASE}/packages/${pkg.slug}`,
     lastModified: new Date(),
     changeFrequency: "monthly",
-    priority: 0.85,
+    priority: GSC_PRIORITY_PACKAGES.has(pkg.slug) ? 0.9 : 0.85,
   }));
 
   const destinationRoutes: MetadataRoute.Sitemap = DESTINATIONS.map((dest) => ({
@@ -39,11 +45,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.75,
   }));
 
+  const HIGH_VALUE_BLOG_SLUGS = new Set([
+    "best-uttarakhand-treks-for-beginners",
+    "best-winter-treks-uttarakhand",
+    "best-time-to-trek-kumaon-uttarakhand",
+    "adi-kailash-yatra-ultimate-guide",
+    "adi-kailash-vs-om-parvat-which-yatra",
+    "adi-kailash-vs-kailash-mansarovar",
+    "adi-kailash-inner-line-permit-guide",
+    "darma-valley-trek-complete-guide",
+    "harshil-valley-gangotri-guide",
+    "dayara-bugyal-vs-gidara-bugyal",
+    "uttarakhand-treks-from-delhi",
+  ]);
+
   const blogRoutes: MetadataRoute.Sitemap = BLOG_POSTS.map((post) => ({
     url: `${BASE}/blog/${post.slug}`,
     lastModified: new Date(post.date),
-    changeFrequency: "yearly",
-    priority: 0.65,
+    changeFrequency: HIGH_VALUE_BLOG_SLUGS.has(post.slug) ? "monthly" : "yearly",
+    priority: HIGH_VALUE_BLOG_SLUGS.has(post.slug) ? 0.8 : 0.65,
   }));
 
   return [

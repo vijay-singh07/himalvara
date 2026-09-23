@@ -10,9 +10,9 @@ import { GallerySection } from "@/components/home/GallerySection";
 import { CTASection } from "@/components/home/CTASection";
 
 export const metadata: Metadata = {
-  title: "Himalvara Travels — Premium Himalayan Trekking & Tours",
+  title: "Himalvara Travels — Veteran-Led Himalayan Trekking & Yatras",
   description:
-    "Veteran-led trekking and spiritual yatras in the Kumaon Himalaya. Adi Kailash, Om Parvat, Darma Valley, Panchachuli Base Camp, and Kumaon cultural tours from Uttarakhand.",
+    "Veteran-led trekking and spiritual yatras in Uttarakhand's Kumaon and Garhwal Himalaya. Adi Kailash, Om Parvat, Darma Valley, Panchachuli Base Camp, Harshil Valley, and Gangotri.",
 };
 
 export default function HomePage() {

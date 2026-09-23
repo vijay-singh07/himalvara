@@ -91,7 +91,7 @@ export const ALL_PACKAGES: Package[] = [
     price: 19999,
     priceNote: "Per person, from Pithoragarh",
     rating: 4.9,
-    reviewCount: 0,
+    reviewCount: 2,
     bestSeason: ["May", "June", "September", "October"],
     highlights: [
       "Darshan of Adi Kailash (Chhota Kailash, 6,310 m) and Parvati Sarovar",
@@ -103,7 +103,7 @@ export const ALL_PACKAGES: Package[] = [
       "Drive through Chialekh meadows, Garbyang, and Napalchu villages",
     ],
     overview:
-      "Adi Kailash — also known as Chhota Kailash — is a sacred Himalayan peak in Pithoragarh district that mirrors the spiritual significance of Kailash Mansarovar without crossing an international border. Om Parvat, on the same restricted inner-line corridor, is one of the most spiritually charged mountains on Earth — its snow fields naturally form the sacred ॐ symbol, visible from the Nabhidhang viewpoint at 4,266 m. This combined yatra delivers both darshans on a single trip, led by our veteran guides who know every kilometre of the sacred Kalapani–Lipulekh corridor.",
+      "Adi Kailash — also known as Chhota Kailash — is a sacred Himalayan peak at 6,310 m in Pithoragarh district that mirrors the spiritual significance of Kailash Mansarovar without requiring a China visa, a government lottery, or ₹1.8 lakh in costs. The approach follows the ancient Kalapani–Lipulekh corridor — the same route that Uttarakhand's Shauka traders used for centuries to cross into Tibet. Access requires an Inner Line Permit and a Protected Area Permit; the entire ILP zone is closed to mass tourism, which means the Jolingkong valley where the peak reveals itself is one of the quietest sacred sites in the Indian Himalaya. Om Parvat, on the same corridor, is one of the most visually striking mountains on Earth — its north face snowfields naturally form the OM (ॐ) symbol, visible from the Nabhidhang viewpoint at 4,266 m. This combined yatra delivers both darshans on a single itinerary. Our veteran guides have walked this corridor hundreds of times; they know the permit checkposts, the village elders, the weather windows, and every trail diversion the road department hasn't mapped yet.",
     itinerary: [
       {
         day: 1,
@@ -134,6 +134,7 @@ export const ALL_PACKAGES: Package[] = [
     featured: true,
     popular: true,
     badge: "Spiritual",
+    departures: ["2026-10-03", "2026-10-10", "2027-05-08", "2027-06-05"],
     variants: [
       {
         origin: "Pithoragarh",
@@ -281,7 +282,7 @@ export const ALL_PACKAGES: Package[] = [
     title: "Darma Valley Trek",
     subtitle: "An offbeat traverse through one of Kumaon's most remote and pristine valleys",
     category: "Trekking",
-    destination: "Pithoragarh, Kumaon, Uttarakhand, India",
+    destination: "Darma Valley, Pithoragarh, Kumaon, Uttarakhand, India",
     image: "https://upload.wikimedia.org/wikipedia/commons/d/dc/Panchachuli_from_Darma_Valley.jpg",
     gallery: [
       "https://upload.wikimedia.org/wikipedia/commons/d/dc/Panchachuli_from_Darma_Valley.jpg",
@@ -296,7 +297,7 @@ export const ALL_PACKAGES: Package[] = [
     price: 34999,
     priceNote: "Per person, from Kathgodam",
     rating: 4.8,
-    reviewCount: 0,
+    reviewCount: 1,
     bestSeason: ["May", "June", "September", "October"],
     highlights: [
       "Panchachuli Glacier — close-up views of all five Panchachuli peaks",
@@ -308,7 +309,7 @@ export const ALL_PACKAGES: Package[] = [
       "Views of Panchachuli I–V, Api Himal, and Nanda Devi",
     ],
     overview:
-      "The Darma Valley sits tucked against the Nepal and Tibet borders in the Pithoragarh district — one of the last truly unspoilt valleys in the Indian Himalaya. The trail winds through ancient Shauka villages, dense rhododendron forests, and glacier-fed meadows to deliver you face-to-face with the Panchachuli massif's five soaring summits. Access requires an Inner Line Permit, which keeps the crowds away and the wilderness intact. Your veteran Himalvara guide has trekked this valley dozens of times and knows every family in every village along the route.",
+      "The Darma Valley runs north from Dharchula in Pithoragarh district, pressed between the Nepal border to the east and Tibet to the north — one of the last genuinely unspoilt river valleys in the Indian Himalaya. The Dhauli Ganga flows through it, fed by glaciers from the Panchachuli massif that dominates the head of the valley. The trail threads through nine ancient Shauka villages — Dar, Sela, Baling, Duktu, Nagling, Bungling and more — whose communities have traded across the Himalayan passes for centuries and whose stone-and-timber architecture is unlike anything in the more-visited trekking corridors. Above the villages, the valley opens into high alpine bugyals thick with rare medicinal plants: yarsagumba, atis, kutki. Access is only possible with an Inner Line Permit and a Protected Area Permit — which means the trail sees a fraction of the traffic of comparable routes in Garhwal or Nepal. At the valley's head, the glacier-fed meadows of Duktu sit beneath a direct view of all five Panchachuli peaks. Your Himalvara guide has made this trek dozens of times; he knows the families in every village, the best wild camp spots above the tree line, and exactly when to time the approach for the clearest views of the massif.",
     itinerary: [
       {
         day: 1,
@@ -399,6 +400,7 @@ export const ALL_PACKAGES: Package[] = [
     excludes: INDIA_TREK_EXCLUDES,
     featured: true,
     badge: "Off-Beat",
+    departures: ["2026-10-01", "2027-05-20", "2027-06-12"],
     variants: [
       {
         origin: "Pithoragarh",
@@ -442,7 +444,7 @@ export const ALL_PACKAGES: Package[] = [
     title: "Panchachuli Base Camp Trek",
     subtitle: "Stand beneath five Himalayan summits in the remote Darma Valley wilderness",
     category: "Trekking",
-    destination: "Pithoragarh, Kumaon, Uttarakhand, India",
+    destination: "Panchachuli, Darma Valley, Pithoragarh, Kumaon, Uttarakhand, India",
     image: "https://upload.wikimedia.org/wikipedia/commons/e/e0/Panchachuli_Peaks.jpg",
     gallery: [
       "https://upload.wikimedia.org/wikipedia/commons/e/e0/Panchachuli_Peaks.jpg",
@@ -457,7 +459,7 @@ export const ALL_PACKAGES: Package[] = [
     price: 28999,
     priceNote: "Per person, from Kathgodam",
     rating: 4.8,
-    reviewCount: 0,
+    reviewCount: 1,
     bestSeason: ["May", "June", "September", "October"],
     highlights: [
       "Panchachuli Base Camp at 4,260 m — views of all five summits",
@@ -469,7 +471,7 @@ export const ALL_PACKAGES: Package[] = [
       "Close-up views of Panchachuli I (6,355 m) and Rajramba (6,537 m)",
     ],
     overview:
-      "The Panchachuli Base Camp Trek is the most rewarding high-altitude objective in the Kumaon Himalaya. The five summits of the Panchachuli massif — Panchachuli I through V, ranging from 6,312 m to 6,904 m — loom directly above the base camp at 4,260 m, creating a visual arena unlike anything else in India. The approach threads through the remote Darma Valley, passing ancient Shauka villages and dense forests before ascending through high alpine meadows to the glacier-edge base camp. This is Himalayan trekking at its most raw.",
+      "The five summits of the Panchachuli massif — Panchachuli I (6,355 m) through Panchachuli V (6,437 m), with Rajramba (6,537 m) and the towering Panchachuli II (6,904 m) at the apex — form one of the most dramatic mountain walls in the Kumaon Himalaya. From the base camp at 4,260 m, the entire massif fills the horizon above you without obstruction. The approach follows the lower section of the Darma Valley Trek route — through Dharchula, Sobla, and the ancient Shauka villages of the Dhauli Ganga valley — before climbing steeply through the Dantu bugyals to the glacier-edge camp. The Inner Line Permit requirement keeps the corridor almost entirely free of commercial trekking traffic. This is not a technical climb; it is a high-altitude wilderness trek that delivers an Annapurna Base Camp-level mountain experience in a valley that most Indian trekkers have never heard of.",
     itinerary: [
       {
         day: 1,
@@ -551,6 +553,7 @@ export const ALL_PACKAGES: Package[] = [
     excludes: INDIA_TREK_EXCLUDES,
     popular: true,
     badge: "New",
+    departures: ["2026-10-02", "2027-05-21", "2027-06-13"],
     variants: [
       {
         origin: "Pithoragarh",
@@ -609,7 +612,7 @@ export const ALL_PACKAGES: Package[] = [
     price: 19999,
     priceNote: "Per person, from Kathgodam",
     rating: 4.7,
-    reviewCount: 0,
+    reviewCount: 1,
     bestSeason: ["March", "April", "May", "September", "October", "November"],
     highlights: [
       "Jageshwar Dham — cluster of 124 ancient Shiva temples (9th–13th century)",
@@ -685,6 +688,7 @@ export const ALL_PACKAGES: Package[] = [
     includes: INDIA_CULTURAL_INCLUDES,
     excludes: INDIA_CULTURAL_EXCLUDES,
     badge: "New",
+    departures: ["2026-10-04", "2026-11-01", "2027-01-10", "2027-03-07"],
     variants: [
       {
         origin: "Pithoragarh",
@@ -728,7 +732,7 @@ export const ALL_PACKAGES: Package[] = [
     title: "Harshil Valley & Gangotri",
     subtitle: "Sacred source of the Ganga and the apple orchards of the Bhagirathi valley",
     category: "Cultural Tour",
-    destination: "Uttarkashi, Garhwal, Uttarakhand, India",
+    destination: "Harshil Valley, Gangotri, Uttarkashi, Garhwal, Uttarakhand, India",
     image: "/packages/harshil-valley.jpg",
     gallery: [
       "/packages/harshil-valley.jpg",
@@ -743,7 +747,7 @@ export const ALL_PACKAGES: Package[] = [
     price: 17999,
     priceNote: "Per person, from Dehradun",
     rating: 4.9,
-    reviewCount: 0,
+    reviewCount: 1,
     bestSeason: ["May", "June", "September", "October"],
     highlights: [
       "Gangotri Dham — sacred source shrine of the Ganga (3,048 m)",
@@ -814,6 +818,7 @@ export const ALL_PACKAGES: Package[] = [
     featured: true,
     popular: true,
     badge: "Sacred",
+    departures: ["2026-10-04", "2026-10-18", "2027-05-09", "2027-06-06"],
     variants: [
       {
         origin: "Rishikesh",
@@ -857,7 +862,7 @@ export const ALL_PACKAGES: Package[] = [
     title: "Kyarkoti Lake Trek",
     subtitle: "A hidden glacial lake in the shadow of the Bhagirathi peaks",
     category: "Trekking",
-    destination: "Uttarkashi, Garhwal, Uttarakhand, India",
+    destination: "Kyarkoti Lake, Uttarkashi, Garhwal, Uttarakhand, India",
     image: "/packages/kyarkoti-lake.jpg",
     gallery: [
       "/packages/kyarkoti-lake.jpg",
@@ -953,6 +958,7 @@ export const ALL_PACKAGES: Package[] = [
     excludes: GARHWAL_TREK_EXCLUDES,
     featured: false,
     badge: "Off-Beat",
+    departures: ["2026-10-02", "2027-05-31", "2027-06-14"],
     variants: [
       {
         origin: "Rishikesh",
@@ -996,7 +1002,7 @@ export const ALL_PACKAGES: Package[] = [
     title: "Gidara Bugyal Trek",
     subtitle: "Garhwal's largest alpine meadow — a sea of grass beneath Bandarpunch",
     category: "Trekking",
-    destination: "Uttarkashi, Garhwal, Uttarakhand, India",
+    destination: "Gidara Bugyal, Uttarkashi, Garhwal, Uttarakhand, India",
     image: "/packages/gidara-bugyal.jpg",
     gallery: [
       "/packages/gidara-bugyal.jpg",
@@ -1090,6 +1096,7 @@ export const ALL_PACKAGES: Package[] = [
     excludes: GARHWAL_TREK_EXCLUDES,
     featured: false,
     badge: "Off-Beat",
+    departures: ["2026-10-01", "2026-10-15", "2027-05-07"],
     variants: [
       {
         origin: "Rishikesh",
@@ -1133,7 +1140,7 @@ export const ALL_PACKAGES: Package[] = [
     title: "Dayara Bugyal Trek",
     subtitle: "The 28 km² meadow classic — Garhwal's most beloved family trek",
     category: "Trekking",
-    destination: "Uttarkashi, Garhwal, Uttarakhand, India",
+    destination: "Dayara Bugyal, Uttarkashi, Garhwal, Uttarakhand, India",
     image: "https://images.unsplash.com/photo-1454496522488-7a8e488e8606?w=1200&q=85",
     gallery: [
       "https://images.unsplash.com/photo-1454496522488-7a8e488e8606?w=1200&q=85",
@@ -1212,6 +1219,7 @@ export const ALL_PACKAGES: Package[] = [
     featured: true,
     popular: true,
     badge: "Family-Friendly",
+    departures: ["2026-10-03", "2026-10-17", "2026-11-01", "2026-12-06", "2027-05-08"],
     variants: [
       {
         origin: "Rishikesh",

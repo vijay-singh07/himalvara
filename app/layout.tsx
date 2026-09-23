@@ -4,6 +4,7 @@ import { Navbar } from "@/components/common/Navbar";
 import { Footer } from "@/components/common/Footer";
 import { ScrollToTop } from "@/components/common/ScrollToTop";
 import { WhatsAppFloat } from "@/components/common/WhatsAppFloat";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 const BASE = "https://www.himalvara.com";
 
@@ -60,6 +61,12 @@ export const metadata: Metadata = {
     description: "Veteran-led yatras and treks across Kumaon & Garhwal, Uttarakhand.",
     images: [`${BASE}/gallery/vsb-299.jpg`],
   },
+  // Google Search Console verification
+  // Steps: search.google.com/search-console → Add Property → HTML tag method → copy content value
+  // Then set NEXT_PUBLIC_GSC_VERIFY in .env.local
+  ...(process.env.NEXT_PUBLIC_GSC_VERIFY
+    ? { verification: { google: process.env.NEXT_PUBLIC_GSC_VERIFY } }
+    : {}),
   robots: {
     index: true,
     follow: true,
@@ -83,7 +90,7 @@ const organizationSchema = {
   "@type": "TravelAgency",
   name: "Himalvara Travels",
   url: BASE,
-  logo: `${BASE}/logo.png`,
+  logo: `${BASE}/himalvara-logo.png`,
   description:
     "Veteran-led yatras and trekking company specialising in the Kumaon Himalaya, Uttarakhand, India since 2018.",
   foundingDate: "2018",
@@ -107,6 +114,27 @@ const organizationSchema = {
   ],
 };
 
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Himalvara Travels",
+  url: BASE,
+  description:
+    "Veteran-led trekking and spiritual yatras in Uttarakhand — Kumaon and Garhwal Himalayas.",
+  potentialAction: {
+    "@type": "SearchAction",
+    target: {
+      "@type": "EntryPoint",
+      urlTemplate: `${BASE}/packages?q={search_term_string}`,
+    },
+    "query-input": "required name=search_term_string",
+  },
+};
+
+// GA4 Measurement ID — replace with your real ID from Google Analytics
+// Steps: analytics.google.com → Admin → Data Streams → Web → Measurement ID (G-XXXXXXXXXX)
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID ?? "";
+
 export default function RootLayout({
   children,
 }: {
@@ -119,12 +147,17 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
         />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
         <Navbar />
         <main>{children}</main>
         <Footer />
         <ScrollToTop />
         <WhatsAppFloat />
       </body>
+      {GA_ID && <GoogleAnalytics gaId={GA_ID} />}
     </html>
   );
 }

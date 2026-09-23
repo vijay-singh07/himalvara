@@ -1,26 +1,71 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronRight, Mountain, Clock, ArrowUpRight } from "lucide-react";
+import { ChevronRight, Mountain, Clock, ArrowUpRight, Calendar } from "lucide-react";
 import { TREKKING_REGIONS } from "@/data/trekking";
 import { ALL_PACKAGES } from "@/data/packages";
+import { MONTHS } from "@/data/treks-by-month";
 import { PackageCard } from "@/components/packages/PackageCard";
 
+const BASE = "https://www.himalvara.com";
+
 export const metadata = {
-  title: "Trekking in the Himalayas | Himalvara Travels",
+  title: "Trekking in Uttarakhand — Kumaon & Garhwal | Himalvara Travels",
   description:
-    "Veteran-led trekking in the Kumaon Himalaya — Pithoragarh Inner Himalaya, Darma Valley, Munsiyari & Panchachuli, and the Kumaon Cultural Circuit. Expert guides, military precision.",
+    "Veteran-led trekking in the Kumaon and Garhwal Himalaya — Darma Valley, Adi Kailash, Panchachuli Base Camp, Dayara Bugyal and more. All permits included. Groups of 2–15.",
+  alternates: {
+    canonical: `${BASE}/trekking`,
+  },
+  openGraph: {
+    title: "Trekking in Uttarakhand — Kumaon & Garhwal | Himalvara Travels",
+    description:
+      "Veteran-led trekking in the Kumaon and Garhwal Himalaya — Darma Valley, Adi Kailash, Panchachuli Base Camp, Dayara Bugyal and more.",
+    url: `${BASE}/trekking`,
+    images: [
+      {
+        url: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1200&q=85",
+        width: 1200,
+        height: 630,
+        alt: "Himalayan trekking trail",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Trekking in Uttarakhand — Kumaon & Garhwal | Himalvara Travels",
+    description:
+      "Veteran-led trekking in the Kumaon and Garhwal Himalaya. All permits included.",
+  },
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: BASE },
+    { "@type": "ListItem", position: 2, name: "Trekking", item: `${BASE}/trekking` },
+  ],
 };
 
 export default function TrekkingPage() {
   const trekPackages = ALL_PACKAGES.filter((p) => p.category === "Trekking");
 
+  // Show only months that have at least one recommended package in our catalogue
+  const activeMonths = MONTHS.filter((m) =>
+    m.recommendedSlugs.some((slug) => ALL_PACKAGES.some((p) => p.slug === slug))
+  );
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+
       {/* ── Hero ──────────────────────────────────────────────── */}
       <section className="relative h-[400px] overflow-hidden">
         <Image
           src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1920&q=85"
-          alt="Himalayan trekking trail"
+          alt="Himalayan trekking trail in Uttarakhand"
           fill
           priority
           sizes="100vw"
@@ -49,7 +94,25 @@ export default function TrekkingPage() {
             Trekking in the Himalayas
           </h1>
           <p className="text-white/70 text-base max-w-xl">
-            Four legendary regions. Every level of experience. One standard of safety.
+            Kumaon and Garhwal — four legendary regions, every level of experience, one standard of safety.
+          </p>
+        </div>
+      </section>
+
+      {/* ── Editorial Intro ───────────────────────────────────── */}
+      <section className="py-14 bg-white border-b border-[#f0ebe0]">
+        <div className="max-w-3xl mx-auto px-6 lg:px-12 text-center">
+          <p className="text-[#c8a951] text-xs font-semibold uppercase tracking-widest mb-4">
+            About Himalvara Trekking
+          </p>
+          <h2 className="font-display text-2xl sm:text-3xl font-bold text-[#132a1f] mb-5 leading-snug">
+            The Kumaon &amp; Garhwal Himalaya — India&apos;s Most Diverse Trekking Territory
+          </h2>
+          <p className="text-[#555] leading-relaxed text-base mb-4">
+            Uttarakhand&apos;s two divisions hold mountain terrain that ranges from pilgrim routes requiring Inner Line Permits to accessible meadow treks suited to first-timers. Kumaon&apos;s remote valleys — Darma, Johar, Ralam — remain largely unknown outside the state, while Garhwal&apos;s Gangotri corridor and Harshil valley carry centuries of sacred history.
+          </p>
+          <p className="text-[#555] leading-relaxed text-base">
+            Himalvara operates exclusively in this region. Our founding team — led by retired army officers from Kumaon and Garhwal — knows these trails not as tourists but as people who grew up near them. Every route is selected, every guide certified, and every emergency plan mapped before your booking is confirmed.
           </p>
         </div>
       </section>
@@ -124,8 +187,66 @@ export default function TrekkingPage() {
         </div>
       </section>
 
+      {/* ── Seasonal Guide ────────────────────────────────────── */}
+      <section className="py-16 lg:py-20 bg-[#f8f4ec]">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <div className="text-center mb-12">
+            <p className="text-[#c8a951] text-xs font-semibold uppercase tracking-widest mb-3">
+              Plan by Season
+            </p>
+            <h2 className="font-display text-3xl font-bold text-[#132a1f] mb-3">
+              Best Time to Trek in Uttarakhand
+            </h2>
+            <p className="text-[#555] text-base max-w-xl mx-auto">
+              Every month has a different face in the Himalaya. Here&apos;s what&apos;s open, what&apos;s worth doing, and what to expect on the trail.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {activeMonths.map((month) => {
+              const recommendedPackages = ALL_PACKAGES.filter((p) =>
+                month.recommendedSlugs.includes(p.slug)
+              );
+              return (
+                <div
+                  key={month.slug}
+                  className="bg-white rounded-2xl p-6 border border-[#e8e2d6] flex flex-col"
+                >
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center gap-2">
+                      <Calendar className="w-4 h-4 text-[#c8a951]" />
+                      <span className="font-display font-bold text-[#132a1f] text-lg">{month.name}</span>
+                    </div>
+                    <span className="text-[10px] font-bold tracking-widest uppercase text-[#888] bg-[#f8f4ec] px-2 py-0.5 rounded-full">
+                      {month.season}
+                    </span>
+                  </div>
+                  <p className="text-[#555] text-sm leading-relaxed mb-4 flex-1">{month.summary}</p>
+                  <div className="border-t border-[#f0ebe0] pt-4">
+                    <p className="text-[10px] font-bold tracking-widest uppercase text-[#888] mb-2">
+                      Recommended
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {recommendedPackages.map((pkg) => (
+                        <Link
+                          key={pkg.slug}
+                          href={`/packages/${pkg.slug}`}
+                          className="text-xs font-semibold text-[#1b3a2d] bg-[#e8f5f1] hover:bg-[#d4eee6] px-3 py-1 rounded-full transition-colors"
+                        >
+                          {pkg.title}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
       {/* ── All Trekking Packages ─────────────────────────────── */}
-      <section className="bg-[#f8f4ec] py-16 lg:py-20">
+      <section className="bg-white py-16 lg:py-20">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="flex items-end justify-between mb-10">
             <div>

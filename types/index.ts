@@ -47,6 +47,8 @@ export interface Package {
    * `duration`/`price`/`itinerary` mirror the primary (first) variant.
    */
   variants?: PackageVariant[];
+  /** Upcoming fixed batch departure dates (ISO 8601 "YYYY-MM-DD"). Used to generate Event schema. */
+  departures?: string[];
 }
 
 export interface PackageVariant {
@@ -106,6 +108,7 @@ export interface Testimonial {
   text: string;
   trek?: string;
   date?: string;
+  packageSlug?: string;
 }
 
 /* ─── Statistics ─────────────────────────────────────────────── */

@@ -17,6 +17,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: `${post.title} | Himalvara Travels`,
     description: post.excerpt,
+    alternates: { canonical: `${BASE}/blog/${post.slug}` },
     openGraph: {
       title: post.title,
       description: post.excerpt,
@@ -93,6 +94,8 @@ function renderBlock(block: ContentBlock, i: number) {
   }
 }
 
+const BASE = "https://www.himalvara.com";
+
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const post = BLOG_POSTS.find((p) => p.slug === slug);
@@ -102,8 +105,53 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     (p) => p.slug !== slug && (p.category === post.category || p.featured)
   ).slice(0, 3);
 
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.title,
+    description: post.excerpt,
+    image: post.coverImage,
+    datePublished: post.date,
+    dateModified: post.date,
+    author: {
+      "@type": "Person",
+      name: post.author,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Himalvara Travels",
+      url: BASE,
+      logo: {
+        "@type": "ImageObject",
+        url: `${BASE}/himalvara-logo.png`,
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `${BASE}/blog/${post.slug}`,
+    },
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: BASE },
+      { "@type": "ListItem", position: 2, name: "Blog", item: `${BASE}/blog` },
+      { "@type": "ListItem", position: 3, name: post.title, item: `${BASE}/blog/${post.slug}` },
+    ],
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       {/* ── Cover ───────────────────────────────────────────── */}
       <section className="relative h-[420px] sm:h-[480px] overflow-hidden">
         <Image
@@ -134,20 +182,19 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           </h1>
 
           <div className="flex flex-wrap items-center gap-4 text-white/60 text-sm">
-            {post.authorImage && (
-              <div className="flex items-center gap-2">
-                <div className="w-9 h-9 rounded-full overflow-hidden border-2 border-white/20 flex-shrink-0">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={post.authorImage} alt={post.author} className="w-full h-full object-cover" />
-                </div>
-                <div>
-                  <p className="text-white text-sm font-semibold leading-none">{post.author}</p>
-                  {post.authorRole && (
-                    <p className="text-white/50 text-[11px] mt-0.5">{post.authorRole}</p>
-                  )}
-                </div>
+            <div className="flex items-center gap-2">
+              <div className="w-9 h-9 rounded-full bg-[#c8a951] flex items-center justify-center flex-shrink-0 border-2 border-white/20">
+                <span className="text-[#0d1f17] text-xs font-bold leading-none">
+                  {post.author.split(" ").map((n) => n[0]).slice(0, 2).join("")}
+                </span>
               </div>
-            )}
+              <div>
+                <p className="text-white text-sm font-semibold leading-none">{post.author}</p>
+                {post.authorRole && (
+                  <p className="text-white/50 text-[11px] mt-0.5">{post.authorRole}</p>
+                )}
+              </div>
+            </div>
             <span className="flex items-center gap-1.5">
               <Calendar className="w-4 h-4" />
               {new Date(post.date).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}
@@ -193,12 +240,11 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             {/* Author bio */}
             {post.authorBio && (
               <div className="mt-10 bg-[#f9f7f2] rounded-2xl p-6 flex gap-4 items-start">
-                {post.authorImage && (
-                  <div className="w-14 h-14 rounded-full overflow-hidden flex-shrink-0 border-2 border-[#c8a951]/30">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={post.authorImage} alt={post.author} className="w-full h-full object-cover" />
-                  </div>
-                )}
+                <div className="w-14 h-14 rounded-full bg-[#1b3a2d] flex items-center justify-center flex-shrink-0 border-2 border-[#c8a951]/30">
+                  <span className="text-[#c8a951] text-lg font-bold leading-none">
+                    {post.author.split(" ").map((n) => n[0]).slice(0, 2).join("")}
+                  </span>
+                </div>
                 <div>
                   <p className="font-display font-bold text-[#132a1f]">{post.author}</p>
                   {post.authorRole && (
