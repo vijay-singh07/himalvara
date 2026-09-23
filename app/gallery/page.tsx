@@ -4,10 +4,19 @@ import { ChevronRight } from "lucide-react";
 import { GALLERY_PHOTOS } from "@/data/gallery";
 import { GalleryClientWrapper } from "@/components/gallery/GalleryClientWrapper";
 
+const BASE = "https://www.himalvara.com";
+
 export const metadata = {
   title: "Gallery | Himalvara Travels",
   description:
     "Photos from Himalayan treks and cultural tours across Kumaon and Garhwal, Uttarakhand. Veteran-led adventures.",
+  alternates: { canonical: `${BASE}/gallery` },
+  openGraph: {
+    title: "Gallery | Himalvara Travels",
+    description:
+      "Photos from veteran-led Himalayan treks across Kumaon and Garhwal, Uttarakhand.",
+    url: `${BASE}/gallery`,
+  },
 };
 
 export default function GalleryPage() {

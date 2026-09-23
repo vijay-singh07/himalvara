@@ -4,10 +4,19 @@ import { ChevronRight, ArrowUpRight, MapPin } from "lucide-react";
 import { DESTINATIONS } from "@/data/destinations";
 import { ALL_PACKAGES } from "@/data/packages";
 
+const BASE = "https://www.himalvara.com";
+
 export const metadata = {
-  title: "Destinations | Himalvara Travels",
+  title: "Destinations — Kumaon & Garhwal Himalaya | Himalvara Travels",
   description:
-    "Explore Kumaon and Garhwal, Uttarakhand with Himalvara — veteran-led Himalayan yatras and treks crafted with military precision.",
+    "Explore Kumaon and Garhwal, Uttarakhand with Himalvara — veteran-led Himalayan yatras and treks across Pithoragarh, Munsiyari, Darma Valley, Uttarkashi, Gangotri and Harshil.",
+  alternates: { canonical: `${BASE}/destinations` },
+  openGraph: {
+    title: "Destinations — Kumaon & Garhwal Himalaya | Himalvara Travels",
+    description:
+      "Kumaon and Garhwal Himalayan destinations — Adi Kailash, Panchachuli, Darma Valley, Harshil and Gangotri.",
+    url: `${BASE}/destinations`,
+  },
 };
 
 export default function DestinationsPage() {

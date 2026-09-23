@@ -5,10 +5,19 @@ import { TeamGrid } from "@/components/about/TeamGrid";
 import { AboutTimeline } from "@/components/about/AboutTimeline";
 import { Button } from "@/components/ui/Button";
 
+const BASE = "https://www.himalvara.com";
+
 export const metadata = {
-  title: "About Us | Himalvara Travels",
+  title: "About Himalvara — Veteran-Led Trekking in Uttarakhand | Himalvara",
   description:
-    "Veteran-founded, veteran-led. The story behind Himalvara Travels — where military discipline meets Himalayan adventure.",
+    "Veteran-founded, veteran-led. Zero incidents, zero fatalities — the Himalvara story: military discipline applied to Kumaon and Garhwal trekking since 2019.",
+  alternates: { canonical: `${BASE}/about` },
+  openGraph: {
+    title: "About Himalvara — Veteran-Led Trekking in Uttarakhand",
+    description:
+      "Veteran-founded, veteran-led. Zero incidents, zero fatalities — the Himalvara story: military discipline applied to Kumaon and Garhwal trekking since 2019.",
+    url: `${BASE}/about`,
+  },
 };
 
 const VALUES = [
@@ -39,12 +48,12 @@ const VALUES = [
 ];
 
 const CERTIFICATIONS = [
-  { label: "TAAN Member", sub: "Trekking Agencies' Association of Nepal" },
-  { label: "NMA Licensed", sub: "Nepal Mountaineering Association" },
-  { label: "WEMS Certified", sub: "Wilderness Emergency Medical Specialists on all treks" },
-  { label: "Govt. Licensed Guides", sub: "All guides hold Nepal Tourism Board certification" },
-  { label: "UIAA Standards", sub: "International Mountaineering & Climbing Federation" },
-  { label: "Eco-Conscious", sub: "Leave No Trace certified operations" },
+  { label: "Uttarakhand Tourism Registered", sub: "Registered travel operator, Uttarakhand" },
+  { label: "Govt. Licensed Guides", sub: "Guides certified by Uttarakhand Forest & Tourism departments" },
+  { label: "Inner Line Permit Facilitator", sub: "Permits arranged for Pithoragarh border zone treks" },
+  { label: "Wilderness First Aid", sub: "Field-trained first responders on every trek" },
+  { label: "Veteran Founded", sub: "Indian Army veteran leadership and safety culture" },
+  { label: "Leave No Trace", sub: "Low-impact camping and community-first operations" },
 ];
 
 export default function AboutPage() {

@@ -3,12 +3,15 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ChevronRight, CheckCircle2, Mountain, Clock, Calendar, ArrowRight } from "lucide-react";
 import { TREKKING_REGIONS } from "@/data/trekking";
+import { DESTINATIONS } from "@/data/destinations";
 import { ALL_PACKAGES } from "@/data/packages";
 import { PackageCard } from "@/components/packages/PackageCard";
 
 export async function generateStaticParams() {
   return TREKKING_REGIONS.map((r) => ({ region: r.slug }));
 }
+
+const BASE = "https://www.himalvara.com";
 
 export async function generateMetadata({
   params,
@@ -18,9 +21,24 @@ export async function generateMetadata({
   const { region } = await params;
   const r = TREKKING_REGIONS.find((x) => x.slug === region);
   if (!r) return {};
+  const title = `${r.name} Trekking — Routes, Packages & Guide | Himalvara`;
+  const imageUrl = r.image.startsWith("/") ? `${BASE}${r.image}` : r.image;
   return {
-    title: `${r.name} Trekking | Himalvara Travels`,
+    title,
     description: r.description,
+    alternates: { canonical: `${BASE}/trekking/${r.slug}` },
+    openGraph: {
+      title,
+      description: r.description,
+      url: `${BASE}/trekking/${r.slug}`,
+      images: [{ url: imageUrl, width: 1200, height: 630, alt: r.name }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description: r.description,
+      images: [imageUrl],
+    },
   };
 }
 
@@ -33,14 +51,42 @@ export default async function TrekkingRegionPage({
   const trek = TREKKING_REGIONS.find((r) => r.slug === region);
   if (!trek) notFound();
 
-  const packages = ALL_PACKAGES.filter(
-    (p) => p.category === "Trekking" && p.destination.includes(trek.packageKeyword)
-  );
+  // Kumaon Cultural Circuit is a cultural-tour hub, not a trekking region — include cultural tours
+  const packages = ALL_PACKAGES.filter((p) => {
+    if (!p.destination.includes(trek.packageKeyword)) return false;
+    if (trek.slug === "kumaon-cultural") return p.category === "Cultural Tour";
+    return p.category === "Trekking";
+  });
 
   const otherRegions = TREKKING_REGIONS.filter((r) => r.slug !== region);
 
+  // Find the parent destination (Kumaon or Garhwal) for breadcrumb and hub link
+  const parentDestination = DESTINATIONS.find((d) =>
+    trek.longDescription.toLowerCase().includes(d.name.toLowerCase()) ||
+    trek.description.toLowerCase().includes(d.name.toLowerCase())
+  );
+
+  const breadcrumbItems = [
+    { "@type": "ListItem", position: 1, name: "Home", item: BASE },
+    { "@type": "ListItem", position: 2, name: "Trekking", item: `${BASE}/trekking` },
+    ...(parentDestination
+      ? [{ "@type": "ListItem", position: 3, name: parentDestination.name, item: `${BASE}/destinations/${parentDestination.slug}` }]
+      : []),
+    { "@type": "ListItem", position: parentDestination ? 4 : 3, name: trek.name, item: `${BASE}/trekking/${trek.slug}` },
+  ];
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: breadcrumbItems,
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       {/* ── Hero ──────────────────────────────────────────────── */}
       <section className="relative h-[55vh] min-h-[400px] overflow-hidden">
         <Image
@@ -170,6 +216,15 @@ export default async function TrekkingRegionPage({
                   Plan my {trek.name} trek
                   <ArrowRight className="w-4 h-4" />
                 </Link>
+                {parentDestination && (
+                  <Link
+                    href={`/destinations/${parentDestination.slug}`}
+                    className="flex items-center justify-between text-sm text-[#555] hover:text-[#1b3a2d] transition-colors mt-2 pt-2 border-t border-[#e4e4e4]"
+                  >
+                    <span>Explore {parentDestination.name}</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                )}
               </div>
             </div>
           </div>

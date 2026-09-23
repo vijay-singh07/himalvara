@@ -4,10 +4,19 @@ import { ChevronRight } from "lucide-react";
 import { ALL_PACKAGES } from "@/data/packages";
 import { PackagesPageClient } from "@/components/packages/PackagesPageClient";
 
+const BASE = "https://www.himalvara.com";
+
 export const metadata = {
-  title: "All Packages | Himalvara Travels",
+  title: "All Trekking & Yatra Packages | Himalvara Travels",
   description:
-    "Browse our full range of Himalayan treks, peak climbs, cultural tours, and wildlife safaris. Expert-led, veteran-founded.",
+    "Browse veteran-led Himalayan trekking, spiritual yatras, and cultural tours across Uttarakhand — Adi Kailash, Panchachuli Base Camp, Darma Valley, Dayara Bugyal, Harshil Valley and Gangotri.",
+  alternates: { canonical: `${BASE}/packages` },
+  openGraph: {
+    title: "All Trekking & Yatra Packages | Himalvara Travels",
+    description:
+      "Veteran-led trekking, spiritual yatras, and cultural tours across Kumaon and Garhwal, Uttarakhand.",
+    url: `${BASE}/packages`,
+  },
 };
 
 export default async function PackagesPage({

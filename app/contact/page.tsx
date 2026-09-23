@@ -3,10 +3,19 @@ import Link from "next/link";
 import { ChevronRight, Phone, Mail, MapPin, Clock, MessageSquare } from "lucide-react";
 import { ContactForm } from "@/components/contact/ContactForm";
 
+const BASE = "https://www.himalvara.com";
+
 export const metadata = {
   title: "Contact & Booking | Himalvara Travels",
   description:
     "Get in touch with Himalvara Travels to plan your trek. Veteran-led yatras and treks across Kumaon and Garhwal, Uttarakhand. Free consultation available.",
+  alternates: { canonical: `${BASE}/contact` },
+  openGraph: {
+    title: "Contact & Booking | Himalvara Travels",
+    description:
+      "Plan your Kumaon or Garhwal trek with Himalvara's veteran-led team. Free consultation.",
+    url: `${BASE}/contact`,
+  },
 };
 
 const INFO_ITEMS = [

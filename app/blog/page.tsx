@@ -4,10 +4,19 @@ import { ChevronRight } from "lucide-react";
 import { BLOG_POSTS } from "@/data/blog";
 import { BlogPageClient } from "@/components/blog/BlogPageClient";
 
+const BASE = "https://www.himalvara.com";
+
 export const metadata = {
-  title: "Blog | Himalvara Travels",
+  title: "Trekking & Yatra Guides — Uttarakhand Himalaya | Himalvara Blog",
   description:
-    "Trek guides, safety tips, gear reviews, and stories from veteran-led Himalayan expeditions across Kumaon and Garhwal, Uttarakhand.",
+    "In-depth guides to Adi Kailash Yatra, Darma Valley, Panchachuli, Harshil & Gangotri, permit rules, seasonal planning and safety — from veteran Himalvara guides.",
+  alternates: { canonical: `${BASE}/blog` },
+  openGraph: {
+    title: "Trekking & Yatra Guides — Uttarakhand Himalaya | Himalvara Blog",
+    description:
+      "Trek guides, permits, seasonal planning, and safety notes for Kumaon and Garhwal, Uttarakhand.",
+    url: `${BASE}/blog`,
+  },
 };
 
 export default function BlogPage() {
