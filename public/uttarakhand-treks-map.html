@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Uttarakhand Treks Map</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #0f1117;
+      color: #e2e8f0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: linear-gradient(135deg, #1a1f2e 0%, #16213e 50%, #0f3460 100%);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-shrink: 0;
+    }
+
+    header .logo {
+      font-size: 22px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #60a5fa, #a78bfa, #34d399);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.5px;
+    }
+
+    header .subtitle {
+      font-size: 13px;
+      color: #94a3b8;
+    }
+
+    header .badge {
+      margin-left: auto;
+      background: rgba(96,165,250,0.15);
+      border: 1px solid rgba(96,165,250,0.3);
+      color: #60a5fa;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .layout {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    /* ── Sidebar ── */
+    .sidebar {
+      width: 320px;
+      background: #13161f;
+      border-right: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .sidebar-header {
+      padding: 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .search-box {
+      width: 100%;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 8px 12px;
+      color: #e2e8f0;
+      font-size: 13px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .search-box::placeholder { color: #64748b; }
+    .search-box:focus { border-color: rgba(96,165,250,0.5); }
+
+    .filter-pills {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .pill {
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.2s;
+      user-select: none;
+    }
+    .pill.all    { background: rgba(96,165,250,0.2);  border-color: rgba(96,165,250,0.4);  color: #60a5fa; }
+    .pill.easy   { background: rgba(52,211,153,0.15); border-color: rgba(52,211,153,0.3);  color: #34d399; }
+    .pill.mod    { background: rgba(251,191,36,0.15); border-color: rgba(251,191,36,0.3);  color: #fbbf24; }
+    .pill.hard   { background: rgba(239,68,68,0.15);  border-color: rgba(239,68,68,0.3);   color: #ef4444; }
+    .pill.active { opacity: 1; }
+    .pill:not(.active) { opacity: 0.45; }
+
+    .trek-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 8px;
+    }
+    .trek-list::-webkit-scrollbar { width: 4px; }
+    .trek-list::-webkit-scrollbar-track { background: transparent; }
+    .trek-list::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+
+    .trek-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 10px;
+      padding: 12px;
+      margin-bottom: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .trek-card:hover {
+      background: rgba(255,255,255,0.07);
+      border-color: rgba(96,165,250,0.3);
+      transform: translateX(2px);
+    }
+    .trek-card.active {
+      background: rgba(96,165,250,0.08);
+      border-color: rgba(96,165,250,0.5);
+    }
+
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .diff-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+    .diff-dot.Easy     { background: #34d399; box-shadow: 0 0 6px #34d39988; }
+    .diff-dot.Moderate { background: #fbbf24; box-shadow: 0 0 6px #fbbf2488; }
+    .diff-dot.Hard     { background: #ef4444; box-shadow: 0 0 6px #ef444488; }
+
+    .card-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: #e2e8f0;
+      line-height: 1.3;
+    }
+
+    .card-meta {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+    }
+
+    .meta-chip {
+      font-size: 10px;
+      color: #94a3b8;
+      background: rgba(255,255,255,0.05);
+      padding: 2px 7px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+    }
+
+    .stats-bar {
+      padding: 12px 16px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      gap: 16px;
+    }
+    .stat { text-align: center; flex: 1; }
+    .stat-num { font-size: 20px; font-weight: 800; color: #60a5fa; }
+    .stat-label { font-size: 10px; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; }
+
+    /* ── Map ── */
+    #map {
+      flex: 1;
+      background: #1a1f2e;
+    }
+
+    /* Custom Leaflet popup */
+    .leaflet-popup-content-wrapper {
+      background: #1e2435;
+      border: 1px solid rgba(96,165,250,0.3);
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+      color: #e2e8f0;
+    }
+    .leaflet-popup-tip { background: #1e2435; }
+    .leaflet-popup-content { margin: 0; padding: 0; }
+
+    .popup-inner { padding: 16px; min-width: 240px; }
+    .popup-name { font-size: 15px; font-weight: 800; margin-bottom: 4px; }
+    .popup-region { font-size: 11px; color: #64748b; margin-bottom: 12px; }
+
+    .popup-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .popup-kv { background: rgba(255,255,255,0.05); padding: 8px; border-radius: 8px; }
+    .popup-kv .k { font-size: 9px; text-transform: uppercase; letter-spacing: 0.5px; color: #64748b; margin-bottom: 2px; }
+    .popup-kv .v { font-size: 13px; font-weight: 700; color: #e2e8f0; }
+
+    .popup-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+    .popup-tag {
+      font-size: 10px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 20px;
+    }
+    .tag-easy   { background: rgba(52,211,153,0.15); color: #34d399; border: 1px solid rgba(52,211,153,0.3); }
+    .tag-mod    { background: rgba(251,191,36,0.15);  color: #fbbf24; border: 1px solid rgba(251,191,36,0.3); }
+    .tag-hard   { background: rgba(239,68,68,0.15);   color: #ef4444; border: 1px solid rgba(239,68,68,0.3); }
+    .tag-season { background: rgba(167,139,250,0.15); color: #a78bfa; border: 1px solid rgba(167,139,250,0.3); }
+    .tag-region { background: rgba(96,165,250,0.12);  color: #60a5fa; border: 1px solid rgba(96,165,250,0.25); }
+
+    /* Custom marker */
+    .trek-marker {
+      width: 28px;
+      height: 28px;
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(-45deg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .trek-marker:hover {
+      transform: rotate(-45deg) scale(1.15);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.5);
+    }
+    .trek-marker span {
+      transform: rotate(45deg);
+      font-size: 12px;
+    }
+    .marker-easy   { background: #34d399; }
+    .marker-mod    { background: #fbbf24; }
+    .marker-hard   { background: #ef4444; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="logo">Himalvara</div>
+    <div class="subtitle">Uttarakhand Trekking Routes</div>
+  </div>
+  <div class="badge">30 Treks Mapped</div>
+</header>
+
+<div class="layout">
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <input class="search-box" id="searchInput" placeholder="Search treks…" oninput="filterTreks()" />
+      <div class="filter-pills">
+        <div class="pill all active"    onclick="setFilter('all')">All</div>
+        <div class="pill easy"          onclick="setFilter('Easy')">Easy</div>
+        <div class="pill mod"           onclick="setFilter('Moderate')">Moderate</div>
+        <div class="pill hard"          onclick="setFilter('Hard')">Hard / Extreme</div>
+      </div>
+    </div>
+
+    <div class="trek-list" id="trekList"></div>
+
+    <div class="stats-bar">
+      <div class="stat"><div class="stat-num" id="statTotal">30</div><div class="stat-label">Treks</div></div>
+      <div class="stat"><div class="stat-num">5,942</div><div class="stat-label">Max Altitude (m)</div></div>
+      <div class="stat"><div class="stat-num">2</div><div class="stat-label">Regions</div></div>
+    </div>
+  </div>
+
+  <div id="map"></div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+// ── Trek Data ──────────────────────────────────────────────────────────────
+const treks = [
+  {
+    name: "Kedarkantha",
+    region: "Garhwal • Uttarkashi",
+    lat: 31.0225, lng: 78.1719,
+    altitude: "3,810 m (12,500 ft)",
+    altM: 3810,
+    duration: "6 days",
+    distance: "20 km",
+    difficulty: "Easy",
+    season: "Dec – Apr",
+    base: "Sankri",
+    desc: "One of India's finest winter treks with panoramic views of Swargarohini, Bandarpoonch & Kalanag."
+  },
+  {
+    name: "Roopkund (Skeleton Lake)",
+    region: "Garhwal • Chamoli",
+    lat: 30.2622, lng: 79.7317,
+    altitude: "5,029 m (16,499 ft)",
+    altM: 5029,
+    duration: "8 days",
+    distance: "53 km",
+    difficulty: "Hard",
+    season: "May–Jun, Sep–Oct",
+    base: "Lohajung",
+    desc: "Mystery lake with ancient human skeletal remains. Crosses Junargali ridge through ali & bedni bugyals."
+  },
+  {
+    name: "Har Ki Dun",
+    region: "Garhwal • Uttarkashi",
+    lat: 31.1560, lng: 78.4100,
+    altitude: "3,566 m (11,700 ft)",
+    altM: 3566,
+    duration: "7 days",
+    distance: "42 km",
+    difficulty: "Easy",
+    season: "Apr–Jun, Sep–Nov",
+    base: "Sankri",
+    desc: "Valley of Gods — cradle-shaped hanging valley with views of Swargarohini & ancient Osla village."
+  },
+  {
+    name: "Valley of Flowers",
+    region: "Garhwal • Chamoli",
+    lat: 30.7272, lng: 79.6019,
+    altitude: "3,658 m (12,001 ft)",
+    altM: 3658,
+    duration: "6 days",
+    distance: "38 km",
+    difficulty: "Easy",
+    season: "Jul – Sep",
+    base: "Govindghat",
+    desc: "UNESCO World Heritage Site. 500+ species of wild Himalayan flowers bloom in the monsoon window."
+  },
+  {
+    name: "Rupin Pass",
+    region: "Garhwal • Uttarkashi → Kinnaur",
+    lat: 31.3447, lng: 78.1644,
+    altitude: "4,650 m (15,256 ft)",
+    altM: 4650,
+    duration: "8 days",
+    distance: "52 km",
+    difficulty: "Hard",
+    season: "May–Jun, Sep–Oct",
+    base: "Dhaula (Uttarakhand)",
+    desc: "One of India's most dramatic treks crossing a waterfall nala and remote high-altitude snowfields."
+  },
+  {
+    name: "Kalindi Pass",
+    region: "Garhwal • Uttarkashi",
+    lat: 30.9178, lng: 79.2822,
+    altitude: "5,942 m (19,495 ft)",
+    altM: 5942,
+    duration: "12 days",
+    distance: "86 km",
+    difficulty: "Hard",
+    season: "Jun – Sep",
+    base: "Gangotri",
+    desc: "Most challenging glaciated pass of Garhwal, connecting Gangotri to Ghastoli. Technical glacier crossing."
+  },
+  {
+    name: "Brahmatal",
+    region: "Garhwal • Chamoli",
+    lat: 30.1533, lng: 79.4117,
+    altitude: "3,793 m (12,444 ft)",
+    altM: 3793,
+    duration: "6 days",
+    distance: "24 km",
+    difficulty: "Moderate",
+    season: "Dec – Mar",
+    base: "Lohajung",
+    desc: "Winter wonderland with frozen alpine lakes and stunning Mt. Trishul & Nanda Ghunti views."
+  },
+  {
+    name: "Kuari Pass",
+    region: "Garhwal • Chamoli",
+    lat: 30.4882, lng: 79.5419,
+    altitude: "3,640 m (11,942 ft)",
+    altM: 3640,
+    duration: "6 days",
+    distance: "33 km",
+    difficulty: "Moderate",
+    season: "Oct – Mar",
+    base: "Auli / Joshimath",
+    desc: "Lord Curzon's Trail. One of the finest viewpoints of the Garhwal Himalayas — 12 peaks above 6,000 m."
+  },
+  {
+    name: "Dayara Bugyal",
+    region: "Garhwal • Uttarkashi",
+    lat: 31.0000, lng: 78.4350,
+    altitude: "3,650 m (11,975 ft)",
+    altM: 3650,
+    duration: "5 days",
+    distance: "22 km",
+    difficulty: "Easy",
+    season: "Apr–Jun, Sep–Dec",
+    base: "Barsu",
+    desc: "Vast alpine meadow — one of India's finest high-altitude meadows with 360° panoramic Himalayan views."
+  },
+  {
+    name: "Bali Pass",
+    region: "Garhwal • Uttarkashi",
+    lat: 31.0800, lng: 78.3100,
+    altitude: "4,950 m (16,240 ft)",
+    altM: 4950,
+    duration: "9 days",
+    distance: "47 km",
+    difficulty: "Hard",
+    season: "May – Jun",
+    base: "Taluka",
+    desc: "High altitude pass connecting Yamunotri and Har Ki Dun. Crosses ancient trans-Himalayan trade routes."
+  },
+  {
+    name: "Pindari Glacier",
+    region: "Kumaon • Bageshwar",
+    lat: 30.2460, lng: 79.9840,
+    altitude: "3,627 m (11,900 ft)",
+    altM: 3627,
+    duration: "7 days",
+    distance: "90 km",
+    difficulty: "Moderate",
+    season: "Apr–Jun, Sep–Oct",
+    base: "Song / Loharkhet",
+    desc: "Gateway to Nanda Devi Sanctuary. Dense rhododendron forests and dramatic morainic glacier snout."
+  },
+  {
+    name: "Milam Glacier",
+    region: "Kumaon • Pithoragarh",
+    lat: 30.5300, lng: 80.0900,
+    altitude: "3,450 m (11,319 ft)",
+    altM: 3450,
+    duration: "10 days",
+    distance: "110 km",
+    difficulty: "Moderate",
+    season: "Jun – Sep",
+    base: "Munsiyari",
+    desc: "One of the largest accessible glaciers in the Kumaon Himalayas. Passes ancient border villages."
+  },
+  {
+    name: "Nanda Devi East Base Camp",
+    region: "Kumaon • Pithoragarh",
+    lat: 30.3560, lng: 80.0330,
+    altitude: "4,250 m (13,943 ft)",
+    altM: 4250,
+    duration: "14 days",
+    distance: "120 km",
+    difficulty: "Hard",
+    season: "May – Jun",
+    base: "Munsiyari",
+    desc: "Approach to the base of Nanda Devi East (7,434 m) — India's second highest peak. Remote & pristine."
+  },
+  {
+    name: "Panwali Kantha Bugyal",
+    region: "Garhwal • Tehri",
+    lat: 30.5658, lng: 78.8642,
+    altitude: "3,368 m (11,050 ft)",
+    altM: 3368,
+    duration: "4 days",
+    distance: "20 km",
+    difficulty: "Easy",
+    season: "May–Jun, Sep–Oct",
+    base: "Malla",
+    desc: "Hidden gem bugyal offering breathtaking views of Gangotri and Kedarnath groups. Less crowded."
+  },
+  {
+    name: "Gidara Bugyal",
+    region: "Garhwal • Uttarkashi",
+    lat: 30.9400, lng: 78.6022,
+    altitude: "4,309 m (14,137 ft)",
+    altM: 4309,
+    duration: "5 days",
+    distance: "28 km",
+    difficulty: "Moderate",
+    season: "May – Oct",
+    base: "Bhatwari",
+    desc: "Remote high-altitude meadow offering stunning views of peaks in the Gangotri group."
+  },
+  {
+    name: "Kedartal",
+    region: "Garhwal • Uttarkashi",
+    lat: 30.9950, lng: 79.0600,
+    altitude: "4,750 m (15,584 ft)",
+    altM: 4750,
+    duration: "7 days",
+    distance: "44 km",
+    difficulty: "Hard",
+    season: "May–Jun, Sep–Oct",
+    base: "Gangotri",
+    desc: "Glacial lake with stunning reflections of Thalaysagar, Jogin peaks. One of Garhwal's most beautiful treks."
+  },
+  {
+    name: "Gangotri – Tapovan",
+    region: "Garhwal • Uttarkashi",
+    lat: 30.9700, lng: 79.2300,
+    altitude: "4,460 m (14,633 ft)",
+    altM: 4460,
+    duration: "5 days",
+    distance: "32 km",
+    difficulty: "Moderate",
+    season: "May – Oct",
+    base: "Gangotri",
+    desc: "High-altitude meadow at the foot of Shivling & Bhagirathi peaks. Base for mountaineering expeditions."
+  },
+  {
+    name: "Yamunotri",
+    region: "Garhwal • Uttarkashi",
+    lat: 31.0147, lng: 78.4572,
+    altitude: "3,293 m (10,804 ft)",
+    altM: 3293,
+    duration: "2 days",
+    distance: "14 km",
+    difficulty: "Easy",
+    season: "May – Nov",
+    base: "Janki Chatti",
+    desc: "Chardham pilgrimage site — source of the Yamuna river, surrounded by high snowy peaks."
+  },
+  {
+    name: "Kush Kalyan",
+    region: "Garhwal • Uttarkashi",
+    lat: 30.7039, lng: 78.6600,
+    altitude: "3,682 m (12,080 ft)",
+    altM: 3682,
+    duration: "2 days",
+    distance: "16 km",
+    difficulty: "Easy",
+    season: "May – Oct",
+    base: "Silla Village",
+    desc: "Short but rewarding meadow trek near Uttarkashi offering views of Gangotri peaks."
+  },
+  {
+    name: "Dodital",
+    region: "Garhwal • Uttarkashi",
+    lat: 30.8600, lng: 78.6200,
+    altitude: "3,307 m (10,850 ft)",
+    altM: 3307,
+    duration: "5 days",
+    distance: "22 km",
+    difficulty: "Easy",
+    season: "Apr–Jun, Sep–Nov",
+    base: "Sangam Chatti",
+    desc: "Sacred alpine lake — birthplace of Lord Ganesha according to local legend. Dense oak & rhododendron."
+  },
+  {
+    name: "Deoria Tal – Chopta",
+    region: "Garhwal • Rudraprayag",
+    lat: 30.4900, lng: 79.1300,
+    altitude: "2,680 m (8,793 ft)",
+    altM: 2680,
+    duration: "3 days",
+    distance: "16 km",
+    difficulty: "Easy",
+    season: "Year-round",
+    base: "Sari Village",
+    desc: "Crystal-clear lake reflecting Chaukhamba peaks. Gateway to Tungnath — world's highest Shiva temple."
+  },
+  {
+    name: "Tungnath – Chandrashila",
+    region: "Garhwal • Rudraprayag",
+    lat: 30.4940, lng: 79.2120,
+    altitude: "4,130 m (13,550 ft)",
+    altM: 4130,
+    duration: "3 days",
+    distance: "10 km",
+    difficulty: "Easy",
+    season: "Apr–Jun, Sep–Nov",
+    base: "Chopta",
+    desc: "World's highest Shiva temple at 3,680 m. Chandrashila summit offers 360° views of Himalayas."
+  },
+  {
+    name: "Auden's Col",
+    region: "Garhwal • Uttarkashi",
+    lat: 30.9650, lng: 79.1200,
+    altitude: "5,490 m (18,012 ft)",
+    altM: 5490,
+    duration: "14 days",
+    distance: "90 km",
+    difficulty: "Hard",
+    season: "Jun – Sep",
+    base: "Gangotri",
+    desc: "One of the most remote and technically demanding glacier crossings. Connecting Gangotri to Kedarnath."
+  },
+  {
+    name: "Satopanth Lake",
+    region: "Garhwal • Chamoli",
+    lat: 30.8000, lng: 79.4600,
+    altitude: "4,402 m (14,441 ft)",
+    altM: 4402,
+    duration: "6 days",
+    distance: "24 km",
+    difficulty: "Moderate",
+    season: "May – Jun",
+    base: "Badrinath",
+    desc: "Sacred glacial lake shaped like an equilateral triangle. Allegedly visited by Brahma, Vishnu & Shiva."
+  },
+  {
+    name: "Hemkund Sahib",
+    region: "Garhwal • Chamoli",
+    lat: 30.6863, lng: 79.6068,
+    altitude: "4,329 m (14,202 ft)",
+    altM: 4329,
+    duration: "2 days",
+    distance: "12 km",
+    difficulty: "Moderate",
+    season: "Jun – Oct",
+    base: "Govindghat",
+    desc: "Sikh pilgrimage site at an alpine glacial lake ringed by seven snow-capped peaks."
+  },
+  {
+    name: "Nag Tibba",
+    region: "Garhwal • Dehradun",
+    lat: 30.6680, lng: 78.2390,
+    altitude: "3,022 m (9,915 ft)",
+    altM: 3022,
+    duration: "2 days",
+    distance: "16 km",
+    difficulty: "Easy",
+    season: "Year-round",
+    base: "Pantwari",
+    desc: "Perfect weekend trek from Dehradun. Summit views of Bandarpoonch, Kedarnath & Gangotri groups."
+  },
+  {
+    name: "Pangarchulla",
+    region: "Garhwal • Chamoli",
+    lat: 30.5560, lng: 79.5680,
+    altitude: "4,700 m (15,420 ft)",
+    altM: 4700,
+    duration: "6 days",
+    distance: "24 km",
+    difficulty: "Moderate",
+    season: "Mar–May, Oct–Dec",
+    base: "Tapovan (Auli)",
+    desc: "Dramatic peak climb with views of Nanda Devi, Trishul, Dronagiri & Chaukhamba. Best in winter."
+  },
+  {
+    name: "Traill's Pass",
+    region: "Kumaon • Pithoragarh",
+    lat: 30.3800, lng: 80.0200,
+    altitude: "5,321 m (17,457 ft)",
+    altM: 5321,
+    duration: "18 days",
+    distance: "130 km",
+    difficulty: "Hard",
+    season: "Jun – Sep",
+    base: "Munsiyari",
+    desc: "Rarely attempted high-altitude pass connecting Pindari and Milam glaciers. First crossed in 1830."
+  },
+  {
+    name: "Curzon Trail (Kuari Pass)",
+    region: "Garhwal • Chamoli",
+    lat: 30.5100, lng: 79.5200,
+    altitude: "3,640 m (11,942 ft)",
+    altM: 3640,
+    duration: "5 days",
+    distance: "30 km",
+    difficulty: "Moderate",
+    season: "Oct – Apr",
+    base: "Haridwar / Auli",
+    desc: "Historic trail named after Viceroy Curzon. Traverses rhododendron forests and open bugyals."
+  },
+  {
+    name: "Khaliya Top",
+    region: "Kumaon • Pithoragarh",
+    lat: 30.2460, lng: 80.2360,
+    altitude: "3,500 m (11,483 ft)",
+    altM: 3500,
+    duration: "3 days",
+    distance: "10 km",
+    difficulty: "Easy",
+    season: "Dec – Apr, Jun – Oct",
+    base: "Munsiyari",
+    desc: "Spectacular winter trek from Munsiyari with views of Panchachuli, Nanda Devi and Nepal peaks."
+  }
+];
+
+// ── Map Setup ──────────────────────────────────────────────────────────────
+const map = L.map('map', {
+  center: [30.7, 79.2],
+  zoom: 8,
+  zoomControl: false
+});
+
+L.control.zoom({ position: 'topright' }).addTo(map);
+
+// Dark terrain tiles
+L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+  subdomains: 'abcd',
+  maxZoom: 19
+}).addTo(map);
+
+// ── Markers ────────────────────────────────────────────────────────────────
+const diffColor = { Easy: '#34d399', Moderate: '#fbbf24', Hard: '#ef4444' };
+const markers = {};
+
+function createMarker(trek, idx) {
+  const color = diffColor[trek.difficulty] || '#60a5fa';
+  const icon = L.divIcon({
+    className: '',
+    html: `<div class="trek-marker marker-${trek.difficulty.toLowerCase()}" title="${trek.name}"><span>⛰</span></div>`,
+    iconSize: [28, 28],
+    iconAnchor: [14, 28],
+    popupAnchor: [0, -32]
+  });
+
+  const tagClass = { Easy: 'tag-easy', Moderate: 'tag-mod', Hard: 'tag-hard' };
+  const marker = L.marker([trek.lat, trek.lng], { icon })
+    .bindPopup(`
+      <div class="popup-inner">
+        <div class="popup-name">${trek.name}</div>
+        <div class="popup-region">${trek.region}</div>
+        <div class="popup-grid">
+          <div class="popup-kv"><div class="k">Altitude</div><div class="v">${trek.altitude}</div></div>
+          <div class="popup-kv"><div class="k">Duration</div><div class="v">${trek.duration}</div></div>
+          <div class="popup-kv"><div class="k">Distance</div><div class="v">${trek.distance}</div></div>
+          <div class="popup-kv"><div class="k">Base Camp</div><div class="v">${trek.base}</div></div>
+        </div>
+        <p style="font-size:12px;color:#94a3b8;margin-bottom:10px;line-height:1.5">${trek.desc}</p>
+        <div class="popup-tags">
+          <span class="popup-tag ${tagClass[trek.difficulty]}">${trek.difficulty}</span>
+          <span class="popup-tag tag-season">🗓 ${trek.season}</span>
+          <span class="popup-tag tag-region">${trek.region.split('•')[0].trim()}</span>
+        </div>
+      </div>
+    `, { maxWidth: 320 })
+    .addTo(map);
+
+  marker.on('click', () => highlightCard(idx));
+  markers[idx] = marker;
+}
+
+treks.forEach(createMarker);
+
+// ── Sidebar List ───────────────────────────────────────────────────────────
+let activeFilter = 'all';
+let activeCard = null;
+
+function renderList(filtered) {
+  const list = document.getElementById('trekList');
+  list.innerHTML = '';
+  document.getElementById('statTotal').textContent = filtered.length;
+
+  filtered.forEach(({ trek, idx }) => {
+    const card = document.createElement('div');
+    card.className = 'trek-card' + (idx === activeCard ? ' active' : '');
+    card.id = `card-${idx}`;
+    card.innerHTML = `
+      <div class="card-top">
+        <div class="diff-dot ${trek.difficulty}"></div>
+        <div>
+          <div class="card-name">${trek.name}</div>
+        </div>
+      </div>
+      <div class="card-meta">
+        <div class="meta-chip">📍 ${trek.altitude}</div>
+        <div class="meta-chip">⏱ ${trek.duration}</div>
+        <div class="meta-chip">🗓 ${trek.season}</div>
+      </div>
+    `;
+    card.onclick = () => {
+      map.setView([trek.lat, trek.lng], 11, { animate: true });
+      markers[idx].openPopup();
+      highlightCard(idx);
+    };
+    list.appendChild(card);
+  });
+}
+
+function getFiltered() {
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  return treks
+    .map((t, i) => ({ trek: t, idx: i }))
+    .filter(({ trek }) => {
+      const matchFilter = activeFilter === 'all' || trek.difficulty === activeFilter;
+      const matchSearch = !q || trek.name.toLowerCase().includes(q) || trek.region.toLowerCase().includes(q);
+      return matchFilter && matchSearch;
+    });
+}
+
+function filterTreks() { renderList(getFiltered()); }
+
+function setFilter(f) {
+  activeFilter = f;
+  document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+  const map2 = { all: '.pill.all', Easy: '.pill.easy', Moderate: '.pill.mod', Hard: '.pill.hard' };
+  document.querySelector(map2[f])?.classList.add('active');
+  renderList(getFiltered());
+}
+
+function highlightCard(idx) {
+  if (activeCard !== null) {
+    document.getElementById(`card-${activeCard}`)?.classList.remove('active');
+  }
+  activeCard = idx;
+  const el = document.getElementById(`card-${idx}`);
+  el?.classList.add('active');
+  el?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+// Initial render
+renderList(getFiltered());
+</script>
+</body>
+</html>
